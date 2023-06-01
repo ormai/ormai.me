@@ -1,0 +1,108 @@
+.moon, .sun, .sun-beams {
+    transform-origin: center center
+}
+
+.moon, .sun {
+    fill: var(--icon-fill)
+}
+
+.theme-toggle:is(:hover, :focus-visible)>.sun-and-moon>:is(.moon, .sun) {
+    fill: var(--icon-fill-hover)
+}
+
+.sun-beams {
+    stroke: var(--icon-fill);
+    stroke-width: 2px
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon>.sun-beams {
+    stroke: var(--icon-fill-hover)
+}
+
+[data-theme=dark] .sun {
+    transform: scale(1.75)
+}
+
+/* hide beams in dark mode */
+[data-theme=dark] .sun-beams {
+    opacity: 0
+}
+
+[data-theme=dark] .moon > circle {
+    /* MASK */
+    transform: translate(-7px)
+}
+
+@supports (cx: 1) {
+    [data-theme=dark] .sun-and-moon>.moon>circle {
+        transform: translate(0);
+        cx: 17
+    }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .sun {
+    /* when the sun spawns */
+        transition: transform .5s var(--ease-elastic-3)
+    }
+    /* when the sun-beams spawn */
+    .sun-beams {
+        transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3)
+    }
+    /* when the mask gets applied */
+    .moon > circle {
+        transition: transform .25s var(--ease-out-5)
+    }
+    @supports (cx: 1) {
+        .moon > circle {
+            transition: cx .25s var(--ease-out-5)
+        }
+    }
+    [data-theme=dark] .sun {
+        transform: scale(1.75);
+        transition-timing-function: var(--ease-3);
+        transition-duration: .25s
+    }
+    [data-theme=dark] .sun-beams {
+        transform: rotate(-25deg);
+        transition-duration: .15s
+    }
+    [data-theme=dark] .moon > circle {
+        transition-delay: .25s;
+        transition-duration: .5s
+    }
+}
+
+.theme-toggle {
+    --size: 2rem;
+    --icon-fill: hsl(210 10% 30%);
+    --icon-fill-hover: hsl(210 10% 15%);
+    background: none;
+    border: none;
+    padding: 0;
+    inline-size: var(--size);
+    block-size: var(--size);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 5px
+}
+
+.theme-toggle > svg {
+    inline-size: 100%;
+    block-size: 100%;
+    stroke-linecap: round
+}
+
+[data-theme=dark] .theme-toggle {
+    --icon-fill: hsl(210 10% 70%);
+    --icon-fill-hover: hsl(210 15% 90%)
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0
+}
+

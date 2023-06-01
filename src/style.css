@@ -1,0 +1,144 @@
+@import url("shared.css");
+@import url("theme-button.css");
+
+:root {
+    font-family: font-sans;
+    color: var(--color-fg);
+    --content-width: 40em;
+}
+
+@media (max-width: 700px) {
+    :root {
+        --content-width: 90vw;
+    }
+
+    #license span {
+        display: none;
+    }
+}
+
+/***** HEADER *****/
+
+header {
+    width: var(--content-width);
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+    margin: 3vh 0;
+}
+
+nav {
+    flex-grow: 1;
+    display: flex;
+    align-items: center; /* align path and serparators vertically */
+    margin-left: -5px; /* compensate for the .path-separator initial padding */
+}
+
+.path {
+    font-family: "Roboto Mono";
+    text-decoration: none;
+    padding: 10px 0; /* make is easily clickable */
+}
+
+.path-separator {
+    font-family: font-mono;
+    font-size: 1.3em;
+    color: var(--color-path-separator);
+    padding: 0 5px;
+}
+
+a { color: var(--color-link); text-decoration: none; }
+a:hover { color: var(--color-link-hover); }
+a:active { color: var(--color-link-active); }
+
+/***** BODY *****/
+
+body {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: var(--content-width);
+    background: var(--color-bg);
+}
+
+main {
+    width: inherit;
+    /* height: 50vh; */
+
+    display: flex;
+    flex-direction: column;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    margin: 0.4em 0;
+}
+
+/***** FOOTER *****/
+
+footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2em;
+    width: var(--content-width);
+    height: 80px;
+    margin: 20px 0;
+}
+
+#links {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5em;
+}
+
+.profile-link, .profile-link svg {
+    display: inline-block;
+    width: auto;
+    height: 2em;
+}
+
+#license {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    flex-grow: 1;
+    gap: 0.5em;
+    height: 100%;
+    font-size: 0.7em;
+}
+
+#CC-BY {
+    display: flex;
+    flex-direction: column;
+    height: 80%;
+    padding: 5px;
+}
+
+#CC-BY img {
+    height: 50%;
+    width: auto;
+}
+
+#scroll-to-top {
+    padding: 0;
+    cursor: pointer;
+    background: none;
+    border: none;
+    height: 50%;
+    width: auto;
+}
+
+#scroll-to-top svg {
+    height: 100%;
+    width: auto;
+}
+
+/* Button animations */
+.animated-button {
+    transition: scale .2s var(--ease-3); }
+.animated-button:hover {
+    scale: 1.05; }
+.animated-button:active {
+    scale: 0.95; }
