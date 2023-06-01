@@ -1,0 +1,38 @@
+:root {
+    --ease-elastic-3: cubic-bezier(.5,1.25,.75,1.25);
+    --ease-elastic-4: cubic-bezier(.5,1.5,.75,1.25);
+    --ease-3: cubic-bezier(.25,0,.3,1);
+    --ease-out-5: cubic-bezier(0,0,0,1);
+}
+
+[data-theme="light"] {
+    --color-fg: #111;
+    --color-bg: #fff;
+    --color-link: #282828;
+    --color-link-hover: #aaa;
+    --color-link-active: red;
+    --color-path-separator: #111;
+    --color-icon-link: invert(9%) sepia(10%) saturate(11%) hue-rotate(321deg) brightness(91%) contrast(82%);
+}
+
+[data-theme="dark"] {
+    --color-fg: #fbf9d7;
+    --color-bg: #282828;
+    --color-link: yellow;
+    --color-link-hover: #eee;
+    --color-link-active: red;
+    --color-path-separator: #aaa;
+    --color-icon-link: invert(100%) sepia(1%) saturate(399%) hue-rotate(188deg) brightness(118%) contrast(100%);
+}
+
+@font-face {
+    font-family: font-sans;
+    /* src: url("/usr/share/fonts/open-sans/open-sans-variable.ttf") format("truetype"); */
+    src: url("/home/mario/.local/share/fonts/sans/OpenSans.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: font-mono;
+    /* src: url("/usr/share/fonts/inconsolata/inconsolata-variable.ttf") format("truetype"); */
+    src: url("/home/mario/.local/share/fonts/mono/Roboto_Mono/RobotoMono-Regular.ttf") format("truetype");
+}
