@@ -1,0 +1,42 @@
+@import url("./main.css");
+
+main {
+  font-size: 1.2rem;
+  height: 100%;
+  width: inherit;
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  gap: 2rem;
+
+  #profile {
+    display: flex;
+    gap: 1rem;
+
+    margin: 15vh auto 5vh;
+
+    #text-box {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.4rem;
+
+      #name {
+        flex-shrink: 1;
+        font-size: 1.6rem;
+      }
+      #username { color: var(--fg-dim); }
+    }
+
+    #picture {
+      border-radius: 50%;
+      height: 8rem;
+    }
+  }
+
+  #description {
+    text-align: center;
+  }
+}
+
