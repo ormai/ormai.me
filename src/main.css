@@ -35,34 +35,18 @@ header {
     margin: 1vh 0;
 }
 
-#themeWrapper {
-  position: relative;
-  display: flex; align-items: center; justify-content: center;
-  width: 2rem;
-  height: 2rem;
-}
-#themeIcon { position: absolute; }
-#theme {
-  all: unset;
-  position: absolute;
-  cursor: pointer;
-  color: trasparent;
-  opacity: 0;
-  margin-right: 100%;
-}
-
 body {
   margin: 0 auto;
   height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: var(--content-width);
   background: var(--color-bg);
 }
 
 main {
-  margin-top: 30%;
   display: flex;
   flex-direction: column;
   gap: 3rem;
@@ -89,6 +73,7 @@ main {
 #picture {
   border-radius: 50%;
   height: 8rem;
+  user-select: none;
 }
 
 #accounts {
