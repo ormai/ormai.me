@@ -1,84 +1,57 @@
 <!DOCTYPE html>
-
-<html lang="en">
+<html lang='en'>
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-
-  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
-
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width'>
+  <link rel='icon' type='image/x-icon' href='static/favicon.ico' />
   <title>ormai</title>
-  <!-- nginx has caching enabled for css therefore browsers won't update
-       the stylesheet when changed unless I change the version below -->
 
-  <link rel="stylesheet" type="text/css" href="home.css?v=1.0" media="screen" />
+  <!-- Nginx has caching enabled for css therefore browsers won't update the stylesheet unless the version is updated -->
+  <link rel='stylesheet' type='text/css' href='main.css?v=1.0.2' media='screen' />
 
   <!--- Instructions for web scrapers --->
-  <meta name="robots" content="index, follow">
+  <meta name='robots' content='index, follow'>
 
-  <meta name="description" content="ormai's personal website">
-  <meta name="keywords" content="developer">
-  <meta name="author" content="Mario D'Andrea">
+  <!-- <meta name='description' content=''> -->
+  <!-- <meta name='author' content=''> -->
+  <!-- <meta name='keywords' content=''> -->
 
-  <meta property="og:site_name" content="ormai.dev">
-  <meta name="og:title" property="og:title" content="ormai">
-  <meta property="og:description" content="ormai's website">
-  <meta name="twitter:description" property="twitter:description" content="ormai's website">
-  <meta name="og:image" content="images/ormai.jpg">
+  <meta property='og:site_name' content='ormai'>
+  <meta name='og:title' property='og:title' content="Mario D'Andrea">
+  <meta name='og:image' content='static/ormai.jpg'>
+  <meta property='og:url' content='ormai.dev'>
+  <meta property='og:type' content='website'>
+  <!-- <meta name='og:image:alt' property='og:image:alt' content='alt text for your image'> -->
 
-  <!--- below is for twitter sharing previews
-    you can test this at cards-dev.twitter.com --->
-  <!-- <meta property="twitter:card" content="https://link-to-an-image-that-represents-your-site"> -->
-  <!-- <meta name="twitter:image:src" property="twitter:image:src" content="https://link-to-an-image-that-represents-your-site"> -->
-  <!-- <meta name="twitter:image" property="twitter:image" content="https://link-to-an-image-that-represents-your-site"> -->
-  <!-- <meta name="og:image:alt" property="og:image:alt" content="alt text for your image"> -->
-
-  <meta property="og:url" content="ormai.dev">
-  <meta property="og:type" content="website">
+  <script type='text/javascript' src='theme.js'></script>
 </head>
-
 
 <body>
   <header>
-    <!-- <nav id="navbar"> -->
-    <!--   <span class="path-separator">/</span> -->
-    <!--   <a class="path" title="Home" href="/">ormai</a> -->
+    <!-- <nav id='navbar'> -->
+    <!--   <span class='path-separator'>/</span> -->
+    <!--   <a class='path' title='Home' href='/'>ormai</a> -->
     <!-- </nav> -->
-
-    <!-- <a href="/about">About</a> -->
-
-    <!-- <button class="button" -->
-    <!--   id="theme" title="Toggle theme" -->
-    <!--   aria-label="dark" -->
-    <!--   aria-live="polite"> -->
-    <!-- </button> -->
-
-    <div id="themeWrapper">
-      <img id="themeIcon">
-      <select name="theme" id="theme" title="Choose theme">
-        <option value="system">System</option>
-        <option value="light">Light</option>
-        <option value="dark">Dark</option>
-      </select>
-    </div>
-    <script type="text/javascript" src="theme.js"></script>
+    <!-- <a href='/about'>About</a> -->
   </header>
 
   <main>
-    <div id="profile">
-      <img id="picture" src="static/ormai.jpg" alt="Profile picture">
-      <div id="text-box">
-        <span id="name">Mario D'Andrea</span>
-        <span id="username">@ormai</span>
-      </div>
+    <div id='profile'>
+      <img id='picture' src='static/ormai.jpg' alt='Profile picture'>
+      <label>
+        <span id='name'>Mario D'Andrea</span>
+        <span id='username'>@ormai</span>
+      </label>
     </div>
-    <p id="description"></p>
+    <p id='description'></p>
 
-    <section id="accounts">
-      <a href="https://github.com/ormai"> <img src="static/github.svg" alt="GitHub"> </a>
-      <a href="https://leetcode.com/ormai"> <img src="static/leetcode.svg" alt="Leetcode"> </a>
-      <a href="https://matrix.to/#/@ormai:ormai.dev"> <img src="static/matrix.svg" alt="Matrix"></a>
+    <section id='accounts'>
+      <a title='GitLab' href='https://gitlab.com/ormai'> <img src='static/gitlab.svg' alt='GitLab'> </a>
+      <a title='GitHub' href='https://github.com/ormai'> <img src='static/github.svg' alt='GitHub'> </a>
+      <a title='LeetCode' href='https://leetcode.com/ormai'> <img src='static/leetcode.svg' alt='LeetCode'> </a>
+      <a title='Reach me on Matrix' href='https://matrix.to/#/@ormai:ormai.dev'> <img src='static/matrix.svg'
+          alt='Matrix'> </a>
     </section>
   </main>
 </body>
