@@ -5,10 +5,12 @@
   --ease-elastic-4: cubic-bezier(.5,1.5,.75,1.25);
   --ease-3: cubic-bezier(.25,0,.3,1);
   --ease-out-5: cubic-bezier(0,0,0,1);
-  font-size: 16px;
-  font-family: Inter, sans-serif;
-  color: var(--color-fg);
+
   --content-width: 40em;
+
+  font-size: 16px;
+  font-family: sans-serif;
+  color: var(--color-fg);
 }
 
 [data-theme="light"] {
