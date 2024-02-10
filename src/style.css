@@ -8,7 +8,7 @@
 @media (prefers-color-scheme: light) {
   :root {
     --color-fg: #111;
-    --color-bg: #fff;
+    --color-bg: #eee;
     --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%);
   }
 }
@@ -16,9 +16,14 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --color-fg: #eee;
-    --color-bg: #1e1e1e;
+    --color-bg: #111;
     --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
   }
+}
+
+::selection {
+  background: var(--color-fg);
+  color: var(--color-bg);
 }
 
 @media (max-width: 700px) {
@@ -32,11 +37,11 @@
 }
 
 body {
-  margin: 0 auto;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin: 0 auto;
+  height: 100vh;
   justify-content: center;
   width: var(--content-width);
   background: var(--color-bg);
@@ -54,7 +59,7 @@ main {
   gap: 1rem;
 }
 
-#profile label {
+#profile div {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -64,10 +69,6 @@ main {
 #name {
   flex-shrink: 1;
   font-size: 1.6rem;
-}
-
-#username {
-  color: var(--fg-dim);
 }
 
 #picture {
