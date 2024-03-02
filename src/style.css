@@ -1,14 +1,12 @@
-:root {
-  --content-width: 40em;
-  font-size: 16px;
-  font-family: sans-serif;
-  color: var(--color-fg);
-}
+/* style.css -- General rules for the whole website */
 
 @media (prefers-color-scheme: light) {
   :root {
     --color-fg: #111;
     --color-bg: #eee;
+    --color-a-visited: #5300b3;
+    --color-a: #7700ff;
+    --color-a-hover: #a04dff;
     --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%);
   }
 }
@@ -17,7 +15,24 @@
   :root {
     --color-fg: #eee;
     --color-bg: #111;
+    --color-a-visited: #9233ff;
+    --color-a: #a04dff;
+    --color-a-hover: #d7b3ff;
     --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
+  }
+}
+
+:root {
+  --content-width: 40em;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: var(--color-fg);
+  height: 100%;
+}
+
+@media (max-width: 700px) {
+  :root {
+    --content-width: 90vw;
   }
 }
 
@@ -26,14 +41,9 @@
   color: var(--color-bg);
 }
 
-@media (max-width: 700px) {
-  :root {
-    --content-width: 90vw;
-  }
-
-  #name {
-    width: min-content;
-  }
+h1 {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 body {
@@ -41,54 +51,61 @@ body {
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
-  height: 100vh;
-  justify-content: center;
   width: var(--content-width);
   background: var(--color-bg);
+  height: 100%;
 }
 
 main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 3rem;
+  flex-grow: 1;
 }
 
-#profile {
-  display: flex;
-  gap: 1rem;
+a:visited {
+  color: var(--color-a-visited);
 }
 
-#profile div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 0.4rem;
+a {
+  color: var(--color-a);
 }
 
-#name {
-  flex-shrink: 1;
-  font-size: 1.6rem;
+a:hover {
+  color: var(--color-a-hover);
 }
 
-#picture {
-  border-radius: 50%;
-  height: 8rem;
-  user-select: none;
+a:active {
+  color: var(--color-fg);
 }
 
-#accounts {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  user-select: none;
-}
-
-#accounts a {
-  margin: auto 0;
-}
-
-#accounts a img {
-  width: 2.5rem;
+.heading-link img {
   filter: var(--icon-filter);
+  height: 1.3rem;
+  vertical-align: bottom;
+  margin-left: .2rem;
+  user-select: none;
+}
+
+h3:not(:hover) .heading-link img {
+  display: none;
+}
+
+footer {
+  width: var(--content-width);
+  display: flex;
+  padding: 5rem 0 3rem 0;
+}
+
+footer p {
+  flex-grow: 1;
+  margin: 0;
+}
+
+footer p a img {
+  user-select: none;
+}
+
+footer nav {
+  display: flex;
+  gap: 1rem;
 }

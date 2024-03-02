@@ -4,31 +4,49 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <link rel="icon" type="image/x-icon" href="static/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="static/favicon.ico">
   <title>Mario D'Andrea</title>
-
-  <!-- Nginx has caching enabled for css therefore browsers won"t update the stylesheet unless the version is updated -->
-  <link rel="stylesheet" type="text/css" href="style.css?v=1.0.5" media="screen" />
-
-  <!--- Instructions for web scrapers --->
   <meta name="robots" content="index, follow">
-
   <meta property="og:site_name" content="Mario D'Andrea">
   <meta name="og:title" property="og:title" content="Mario D'Andrea">
   <meta name="og:image" content="static/ormai.jpg">
   <meta property="og:url" content="ormai.dev">
   <meta property="og:type" content="website">
+
+  <!-- Nginx has caching enabled for css therefore browsers won"t update the stylesheet unless the version is updated -->
+  <link rel="stylesheet" type="text/css" href="style.css?v=1.0.5" media="screen">
+  <style>
+    #accounts {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      user-select: none;
+    }
+    #accounts a {
+      margin: auto 0;
+    }
+    #accounts a img {
+      width: 2.5rem;
+      filter: var(--icon-filter);
+    }
+  </style>
 </head>
 
-<body>
-  <main>
-    <section id="profile">
-      <img id="picture" src="static/ormai.jpg" alt="Picture">
-      <div>
-        <span id="name">Mario D'Andrea</span>
-        <span id="username">@ormai</span>
+<body style="justify-content: center;">
+  <main style="gap: 3rem; flex-grow: 0">
+    <section style="display: flex; gap: 1rem;">
+      <img style="border-radius: 50%; height: 8rem; user-select: none;" src="static/ormai.jpg" alt="Profile picture" title="Welcome to my humble dwelling, my fellow human">
+      <div style="display: flex; flex-direction: column; justify-content: center; gap: 0.4rem;">
+        <span style="font-size: 1.6rem;">Mario D'Andrea</span>@ormai
       </div>
     </section>
+
+    <section style="display: flex; gap: 1rem; width: min-content; margin: auto;">
+      <a href="about">About</a>
+      <a href="now">Now</a>
+      <a href="uses">Uses</a>
+    </section>
+
     <p>Computer science student based in Italy</p>
     <section id="accounts">
       <a title="GitLab" href="https://gitlab.com/ormai"> <img src="static/gitlab.svg" alt="GitLab"></a>
@@ -37,6 +55,7 @@
       <a title="Reach me on Matrix" href="https://matrix.to/#/@ormai:ormai.dev"> <img src="static/matrix.svg"
           alt="Matrix"></a>
     </section>
+
   </main>
 </body>
 
