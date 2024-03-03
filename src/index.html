@@ -12,9 +12,7 @@
   <meta name="og:image" content="static/ormai.jpg">
   <meta property="og:url" content="ormai.dev">
   <meta property="og:type" content="website">
-
-  <!-- Nginx has caching enabled for css therefore browsers won"t update the stylesheet unless the version is updated -->
-  <link rel="stylesheet" type="text/css" href="style.css?v=1.0.5" media="screen">
+  <link rel="stylesheet" type="text/css" href="style.css" media="screen">
   <style>
     #accounts {
       display: flex;
@@ -22,9 +20,11 @@
       gap: 1rem;
       user-select: none;
     }
+
     #accounts a {
       margin: auto 0;
     }
+
     #accounts a img {
       width: 2.5rem;
       filter: var(--icon-filter);
@@ -35,7 +35,8 @@
 <body style="justify-content: center;">
   <main style="gap: 3rem; flex-grow: 0">
     <section style="display: flex; gap: 1rem;">
-      <img style="border-radius: 50%; height: 8rem; user-select: none;" src="static/ormai.jpg" alt="Profile picture" title="Welcome to my humble dwelling, my fellow human">
+      <img style="border-radius: 50%; height: 8rem; user-select: none;" src="static/ormai.jpg" alt="Profile picture"
+        title="Welcome to my humble dwelling, my fellow human">
       <div style="display: flex; flex-direction: column; justify-content: center; gap: 0.4rem;">
         <span style="font-size: 1.6rem;">Mario D'Andrea</span>@ormai
       </div>
@@ -48,11 +49,12 @@
     </section>
 
     <p>Computer science student based in Italy</p>
+
     <section id="accounts">
-      <a title="GitLab" href="https://gitlab.com/ormai"> <img src="static/gitlab.svg" alt="GitLab"></a>
-      <a title="GitHub" href="https://github.com/ormai"> <img src="static/github.svg" alt="GitHub"></a>
-      <a title="LeetCode" href="https://leetcode.com/ormai"> <img src="static/leetcode.svg" alt="LeetCode"></a>
-      <a title="Reach me on Matrix" href="https://matrix.to/#/@ormai:ormai.dev"> <img src="static/matrix.svg"
+      <a href="https://gitlab.com/ormai" title="GitLab"><img src="static/gitlab.svg" alt="GitLab"></a>
+      <a href="https://github.com/ormai" title="GitHub"><img src="static/github.svg" alt="GitHub"></a>
+      <a href="https://leetcode.com/ormai" title="LeetCode"><img src="static/leetcode.svg" alt="LeetCode"></a>
+      <a href="https://matrix.to/#/@ormai:ormai.dev" t itle="Reach me on Matrix"><img src="static/matrix.svg"
           alt="Matrix"></a>
     </section>
 
