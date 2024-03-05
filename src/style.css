@@ -4,9 +4,9 @@
   :root {
     --color-fg: #111;
     --color-bg: #eee;
-    --color-a-visited: #5300b3;
-    --color-a: #7700ff;
-    --color-a-hover: #a04dff;
+    /* --color-a-visited: #5300b3; */
+    /* --color-a: #7700ff; */
+    /* --color-a-hover: #a04dff; */
     --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%);
   }
 }
@@ -15,9 +15,9 @@
   :root {
     --color-fg: #eee;
     --color-bg: #111;
-    --color-a-visited: #9233ff;
-    --color-a: #a04dff;
-    --color-a-hover: #d7b3ff;
+    /* --color-a-visited: linear-gradient(45deg, blue, red); */
+    /* --color-a: #a04dff; */
+    /* --color-a-hover: #d7b3ff; */
     --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
   }
 }
@@ -93,16 +93,17 @@ h3:not(:hover) .heading-link img {
 footer {
   width: var(--content-width);
   display: flex;
+  align-items: center;
   padding: 5rem 0 3rem 0;
 }
 
-footer p {
+#license {
   flex-grow: 1;
   margin: 0;
 }
 
-footer p a img {
-  user-select: none;
+#license p {
+  margin: 0;
 }
 
 footer nav {
