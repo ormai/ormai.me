@@ -33,7 +33,16 @@
 </head>
 
 <body style="justify-content: center;">
-  <main style="gap: 3rem; flex-grow: 0">
+  <header>
+    <div id="left">😊</div>
+    <nav>
+      <a href="about">About</a>
+      <a href="now">Now</a>
+      <a href="uses">Uses</a>
+    </nav>
+  </header>
+
+  <main style="gap: 5rem; flex-grow: 0">
     <section style="display: flex; gap: 1rem;">
       <img style="border-radius: 50%; height: 8rem; user-select: none;" src="static/ormai.jpg" alt="Profile picture"
         title="Welcome to my humble dwelling, my fellow human">
@@ -43,19 +52,10 @@
       </div>
     </section>
 
-    <section style="display: flex; gap: 1rem; width: min-content; margin: auto;">
-      <a href="about">About</a>
-      <a href="now">Now</a>
-      <a href="uses">Uses</a>
-    </section>
-
     <section id="accounts">
-      <a href="mailto:mdandrea@disroot.org" title="Contact me via email"><img src="static/mail.svg" alt="Email"></a>
-      <a href="https://matrix.to/#/@ormai:ormai.dev" t itle="Reach me on Matrix"><img src="static/matrix.svg"
-          alt="Matrix"></a>
-      <a href="https://gitlab.com/ormai" title="GitLab"><img src="static/gitlab.svg" alt="GitLab"></a>
+      <a href="mailto:mdandrea@disroot.org" title="Email"><img src="static/mail.svg" alt="Email"></a>
+      <a href="https://matrix.to/#/@ormai:ormai.dev" title="Matrix"><img src="static/matrix.svg" alt="Matrix"></a>
       <a href="https://github.com/ormai" title="GitHub"><img src="static/github.svg" alt="GitHub"></a>
-      <a href="https://leetcode.com/ormai" title="LeetCode"><img src="static/leetcode.svg" alt="LeetCode"></a>
     </section>
   </main>
 </body>
