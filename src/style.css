@@ -2,19 +2,19 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --color-fg: #111;
+    --color-fg: #121415;
     --color-fg-active: #000;
     --color-fg-dim: #444;
-    --color-bg: #eee;
+    --color-bg: #EEE;
     --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-fg: #eee;
-    --color-fg-active: #fff;
-    --color-fg-dim: #bbb;
+    --color-fg: #FAFAFA;
+    --color-fg-active: #FFF;
+    --color-fg-dim: #BBB;
     --color-bg: #111;
     --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
   }
@@ -115,10 +115,13 @@ footer {
   padding: 5rem 0 3rem 0;
 }
 
-#license {
+footer #left {
   flex-grow: 1;
+}
+
+#license {
   margin: 0;
-  font-size: .7rem;
+  font-size: .5rem;
 }
 
 #license #cc img {
