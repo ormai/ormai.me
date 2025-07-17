@@ -1,3 +1,5 @@
 #!/bin/sh
 
-rsync --archive --delete --info=progress src/ mario@server:/var/www/ormai.dev
+# Should probably do some preprocessing like minifying.
+
+rsync --archive --delete --info=progress src/ server:/var/www/ormai.dev
