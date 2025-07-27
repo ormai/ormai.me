@@ -6,7 +6,8 @@
     --color-fg-active: #000;
     --color-fg-dim: #444;
     --color-bg: #FAFAFA;
-    --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%);
+    /* --icon-filter: invert(14%) sepia(20%) saturate(407%) hue-rotate(172deg) brightness(95%) contrast(94%); */
+    --icon-filter: none;
   }
 }
 
@@ -17,6 +18,12 @@
     --color-fg-dim: #BBB;
     --color-bg: #121415;
     --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
+  }
+
+
+  /* Use inverted color to account for the filter */
+  a:has(img), a:has(img):hover {
+    color: var(--color-bg);
   }
 }
 
