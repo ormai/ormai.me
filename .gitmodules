@@ -1,3 +1,0 @@
-[submodule "src/static/inter"]
-	path = src/static/inter
-	url = git@github.com:rsms/inter.git
