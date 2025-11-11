@@ -17,5 +17,5 @@ serve)
   python -m http.server
   ;;
 clean) rm -r target ;;
-*) echo "unkown subcommand $1" ;;
+*) echo "Unkown subcommand '$1'" ;;
 esac
