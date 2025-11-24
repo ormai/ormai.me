@@ -1,1 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" id="a" width="796.959" height="797.133" viewBox="0 0 47.818 47.828"><defs id="defs1"><style id="style1">.h{fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round}</style></defs><g id="b" style="fill:#000;fill-opacity:1" transform="matrix(1.25836 0 0 1.3018 -6.292 -7.33)"><g id="c" style="fill:#000;fill-opacity:1"><rect id="d" width="7.603" height="29.842" x="5.5" y="6.616" class="h" rx="1" ry="1" style="fill:#000;fill-opacity:1"/><rect id="e" width="7.603" height="29.842" x="16.564" y="6.616" class="h" rx="1" ry="1" style="fill:#000;fill-opacity:1"/><rect id="f" width="7.603" height="29.842" x="30.911" y="6.343" class="h" rx="1" ry="1" style="fill:#000;fill-opacity:1" transform="rotate(-16.906 34.712 21.264)"/><rect id="g" width="37" height="2.828" x="5.5" y="39.043" class="h" rx="1" ry="1" style="fill:#000;fill-opacity:1"/></g></g></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 47.818 47.828" fill="#currentColor"
+    stroke="currentColor">
+  <g transform="matrix(1.25836 0 0 1.3018 -6.292 -7.33)">
+    <rect width="7.603" height="29.842" x="5.5" y="6.616" rx="1" ry="1"/>
+    <rect width="7.603" height="29.842" x="16.564" y="6.616" rx="1" ry="1"/>
+    <rect width="7.603" height="29.842" x="30.911" y="6.343" rx="1" ry="1"
+      transform="rotate(-16.906 34.712 21.264)"/>
+    <rect width="37" height="2.828" x="5.5" y="39.043" rx="1" ry="1"/>
+  </g>
+</svg>

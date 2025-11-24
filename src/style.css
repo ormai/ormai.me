@@ -1,11 +1,38 @@
+@media (prefers-color-scheme: light) {
+  html {
+    --color-fg: #111;
+    --color-bg: #fff;
+    --icon-filter: none;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --color-fg: #ddd;
+    --color-bg: #181617;
+    --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
+  }
+
+  /* This is for the alt-text */
+  a:has(img),
+  a:has(img):hover {
+    color: var(--color-bg);
+  }
+}
+
+html {
+  height: 100%;
+  color-scheme: light dark;
+  font-size: 16px;
+  font-family: sans-serif;
+  color: var(--color-fg);
+  background: var(--color-bg);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-p {
-  line-height: 1.5;
 }
 
 p,
@@ -18,52 +45,32 @@ h6 {
   overflow-wrap: break-word;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --color-fg: #111;
-    --color-bg: #fff;
-    --icon-filter: none;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-fg: #ddd;
-    --color-bg: #111;
-    --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
-  }
-
-  /* This is for the alt-text */
-  a:has(img),
-  a:has(img):hover {
-    color: var(--color-bg);
-  }
-}
-
-:root {
-  --content-width: 40em;
-  font-size: 16px;
-  font-family: sans-serif;
-  color: var(--color-fg);
-  background: var(--color-bg);
-  height: 100%;
-}
-
-@media (max-width: 700px) {
-  :root {
-    --content-width: 90vw;
-  }
-}
-
-::selection {
-  background: var(--color-fg);
-  color: var(--color-bg);
+img,
+svg,
+video {
+  max-width: 100%;
+  display: block;
 }
 
 body {
-  margin: 0 auto;
-  width: var(--content-width);
+  margin: 0;
+  max-width: min(70ch, 100% - 2.5em);
+  margin-inline: auto;
   height: 100%;
+
+  p {
+    line-height: 1.5;
+  }
+}
+
+article {
+  flex-grow: 1;
+}
+
+footer {
+  padding: 3mm 0;
+  font-size: 0.9em;
+  filter: brightness(0.6);
 }
 
 .col {
