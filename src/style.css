@@ -1,22 +1,39 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+p {
+  line-height: 1.5;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    --color-fg: #121415;
-    --color-fg-active: #000;
-    --color-fg-dim: #444;
-    --color-bg: #fafafa;
+    --color-fg: #111;
+    --color-bg: #fff;
     --icon-filter: none;
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --color-fg: #fafafa;
-    --color-fg-active: #fff;
-    --color-fg-dim: #bbb;
-    --color-bg: #121415;
-    --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(104%) contrast(107%);
+    --color-fg: #ddd;
+    --color-bg: #111;
+    --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
   }
 
+  /* This is for the alt-text */
   a:has(img),
   a:has(img):hover {
     color: var(--color-bg);
