@@ -73,6 +73,17 @@ footer {
   filter: brightness(0.6);
 }
 
+@media (max-width: 500px) {
+  section#profile {
+    flex-direction: column;
+    text-align: center;
+  }
+}
+
+section#profile {
+  display: flex;
+}
+
 .col {
   display: flex;
   flex-direction: column;
