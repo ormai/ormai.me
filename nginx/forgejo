@@ -1,11 +1,15 @@
-# vi: ft=nginx ts=4 sw=4
+# vi:ft=nginx
 
 server {
+    if ($http_user_agent ~* "(AdsBot-Google|Amazonbot|anthropic-ai|Applebot|Applebot-Extended|AwarioRssBot|AwarioSmartBot|Bytespider|CCBot|ChatGPT-User|ClaudeBot|Claude-Web|cohere-ai|DataForSeoBot|Diffbot|FacebookBot|FriendlyCrawler|Google-Extended|GoogleOther|GPTBot|img2dataset|ImagesiftBot|magpie-crawler|Meltwater|omgili|omgilibot|peer39_crawler|peer39_crawler/1.0|PerplexityBot|PiplBot|scoop.it|Seekr|YouBot)"){
+        return 403;
+    }
+
     server_name git.ormai.me;
     http2 on;
-
+    
     location / {
-        proxy_pass http://127.0.0.1:3000/;
+        proxy_pass http://127.0.0.1:3000;
         add_header X-Frame-Options SAMEORIGIN;
         add_header X-XSS-Protection "1; mode=block";
         proxy_redirect off;
@@ -26,6 +30,10 @@ server {
 }
 
 server {
+    if ($http_user_agent ~* "(AdsBot-Google|Amazonbot|anthropic-ai|Applebot|Applebot-Extended|AwarioRssBot|AwarioSmartBot|Bytespider|CCBot|ChatGPT-User|ClaudeBot|Claude-Web|cohere-ai|DataForSeoBot|Diffbot|FacebookBot|FriendlyCrawler|Google-Extended|GoogleOther|GPTBot|img2dataset|ImagesiftBot|magpie-crawler|Meltwater|omgili|omgilibot|peer39_crawler|peer39_crawler/1.0|PerplexityBot|PiplBot|scoop.it|Seekr|YouBot)"){
+        return 403;
+    }
+
     if ($host = git.ormai.me) {
         return 301 https://$host$request_uri;
     } # managed by Certbot
@@ -34,4 +42,3 @@ server {
     listen 80;
     return 404; # managed by Certbot
 }
-
