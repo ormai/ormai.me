@@ -29,6 +29,12 @@ html {
   background: var(--color-bg);
 }
 
+body {
+  height: 100%;
+  margin: 0;
+}
+
+
 *,
 *::before,
 *::after {
@@ -52,11 +58,9 @@ video {
   display: block;
 }
 
-body {
-  margin: 0;
+.post {
   max-width: min(70ch, 100% - 2.5em);
   margin-inline: auto;
-  height: 100%;
 
   p {
     line-height: 1.5;
