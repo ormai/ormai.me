@@ -3,10 +3,10 @@
 set -e
 
 deploy() {
-  cp -Rf ./src ./target
+  rsync -avhL --delete src/ target
   # https://github.com/tdewolff/minify
   minify --recursive --inplace target
-  rsync --archive --delete --info=progress target/ server:/var/www/ormai.me
+  rsync -avhL --partial --info=progress2 --delete --info=progress target/ server:/var/www/ormai.me
 }
 
 case "$1" in

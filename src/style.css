@@ -58,6 +58,7 @@ video {
   display: block;
 }
 
+/* This should be a generic responsive container */
 .post {
   max-width: min(70ch, 100% - 2.5em);
   margin-inline: auto;
@@ -147,4 +148,25 @@ section#profile {
 
 .no-select {
   user-select: none;
+}
+
+/* Structure of a quotation. Blockuote may contain multiple paragrpahs
+   - div.quote
+     - blockquote
+     - span
+       - cite */
+.quote {
+  border-left: var(--color-fg) solid .2em;
+  display: flex;
+  flex-direction: column;
+  gap: .7em;
+  padding: .5em 0 .5em 1em;
+  font-family: serif;
+  margin: 0 2em;
+
+  blockquote {
+    font-style: italic;
+    font-size: 1.1em;
+    margin: 0;
+  }
 }
