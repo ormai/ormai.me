@@ -1,19 +1,9 @@
-@media (prefers-color-scheme: light) {
-  html {
-    --color-fg: #111;
-    --color-bg: #fff;
-    --icon-filter: none;
-  }
-}
-
 @media (prefers-color-scheme: dark) {
   html {
-    --color-fg: #ddd;
-    --color-bg: #181617;
-    --icon-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
+    --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
   }
 
-  /* This is for the alt-text */
+  /* The filter inverts the color of the alt text, making it unreadable, this is a fix. */
   a:has(img),
   a:has(img):hover {
     color: var(--color-bg);
@@ -21,19 +11,21 @@
 }
 
 html {
-  height: 100%;
   color-scheme: light dark;
-  font-size: 16px;
-  font-family: sans-serif;
+  --color-fg: light-dark(#111, #ddd);
+  --color-bg: light-dark(#fff, #181617);
   color: var(--color-fg);
   background: var(--color-bg);
+
+  height: 100%;
+  font-size: 16px;
+  font-family: sans-serif;
 }
 
 body {
   height: 100%;
   margin: 0;
 }
-
 
 *,
 *::before,
@@ -58,8 +50,8 @@ video {
   display: block;
 }
 
-/* This should be a generic responsive container */
-.post {
+/* Text container */
+.container {
   max-width: min(70ch, 100% - 2.5em);
   margin-inline: auto;
 
@@ -76,17 +68,6 @@ footer {
   padding: 3mm 0;
   font-size: 0.9em;
   filter: brightness(0.6);
-}
-
-@media (max-width: 500px) {
-  section#profile {
-    flex-direction: column;
-    text-align: center;
-  }
-}
-
-section#profile {
-  display: flex;
 }
 
 .col {
@@ -135,22 +116,12 @@ section#profile {
   gap: 5rem;
 }
 
-#accounts {
-  a {
-    margin: auto 0;
-
-    img {
-      width: 2.5rem;
-      filter: var(--icon-filter);
-    }
-  }
-}
 
 .no-select {
   user-select: none;
 }
 
-/* Structure of a quotation. Blockuote may contain multiple paragrpahs
+/* Structure of a quotation. Blockquote may contain multiple paragrpahs
    - div.quote
      - blockquote
      - span

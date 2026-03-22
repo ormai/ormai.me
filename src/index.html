@@ -5,19 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="robots" content="index, follow">
     <meta property="og:site_name" content="Mario D'Andrea">
-    <meta name="og:title" property="og:title" content="Mario D'Andrea">
-    <meta name="og:image" content="/assets/ormai.jpg">
+    <meta property="og:title" content="Mario D'Andrea">
+    <meta property="og:image" content="/assets/ormai.jpg">
     <meta property="og:url" content="ormai.me">
     <meta property="og:type" content="website">
     <meta name="fediverse:creator" content="@ormai@mas.to">
     <title>Mario D'Andrea</title>
     <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/style.css" media="screen">
+
+    <style>
+    @media (max-width: 500px) {
+      #profile {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    #accounts a {
+      margin: auto 0;
+
+      img {
+        width: 2.5rem;
+        filter: var(--svg-filter);
+      }
+    }
+    </style>
   </head>
 
-  <body class="col center post">
+  <body class="col center container">
     <main class="col gap5">
-      <section id="profile" class="center gap1">
+      <section id="profile" class="row center gap1">
         <img
           class="no-select"
           style="border-radius: 50%; height: 8rem;"
