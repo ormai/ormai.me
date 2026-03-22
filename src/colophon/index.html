@@ -1,0 +1,114 @@
+<html lang="en">
+  <head>
+    <title>Colophon</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/style.css" media="screen">
+    <meta property="og:site_name" content="Mario D'Andrea">
+    <meta name="og:title" property="og:title" content="Colophon">
+    <meta name="og:image" content="/assets/ormai.jpg">
+    <meta property="og:url" content="ormai.me">
+    <meta property="og:type" content="website">
+    <meta name="og:description" content="How this site is made">
+    <meta name="fediverse:creator" content="@ormai@mas.to">
+  </head>
+  <body class="col post">
+    <article>
+      <h1>
+        Colophon
+      </h1>
+
+      <aside>
+        <a href="https://indieweb.org/colophon">
+          About the <code>/colophon</code> page.
+        </a>
+      </aside>
+
+      <p>
+        This site is a work in progress and will remain as such forever. All the
+        changes made to this website are tracked with Git, the distributed
+        versioning system. The source of this website is licensed under <a
+          href="https://www.gnu.org/licenses/agpl-3.0.en.html"
+        >AGPL-3.0-or-later</a> and can be found <a
+          href="https://git.ormai.me/ormai/ormai.me"
+        >here</a> and <a href="https://github.com/ormai/ormai.me"
+        >here (mirror)</a>.
+      </p>
+
+      <p>
+        This site aims to be <em>simple</em>, in the sense that I avoid using a
+        lot of third party tools and frameworks. I stick with standard <abbr
+          title="HyperText Markup Language"
+        >HTML</abbr> and
+        <abbr title="Cascading Style Sheet">CSS</abbr> and I might include some
+        JavaScript in the future if I ever want to have some dynamic pages, that
+        might be cool. The build pipeline is thin and defined in a brief shell
+        script that calls various tools. To write this site I directly edit the
+        HTML files in a text editor, the one I use should be mentioned in <a
+          href="/uses"
+        >/uses</a>. I think this gives me more control on the content of each
+        page, as opposed to using a static site generator.
+      </p>
+
+      <p>
+        Just HTML and CSS can bring you <a
+          href="https://justfuckingusehtml.com/"
+        >far enough</a>. The most recent developments like the addition of the
+        <code>&lt;dialog&gt;</code> element are promising. I also try not to
+        make each visitors download external fonts, as the <a
+          href="https://systemfontstack.com/"
+        >device itself</a> should already have them. Lastly I strive to have <a
+          href="https://www.w3.org/Provider/Style/URI"
+        >cool URIs</a>, and you should too because it's very annoying when I
+        bookmark your site and then I am met with a <code>404</code> error page.
+      </p>
+
+      <p>
+        Other than be standard compliant this site aims to be <em
+        >accessible</em> and respect its visitors. In this regard improvements
+        are probably necessary, since I have little knowledge in this field.
+        Feedback is very welcome through the channels provided elsewhere in this
+        site.
+      </p>
+
+      <p>
+        As a principle, this website doesn't have tracking cookies or code for
+        analytical purposes. At the time of writing, only one cookie is set as a
+        countermeasure for aggressive web scrapers, but that might change in the
+        near feature, as the AI hellscape we live in evolves rapidly and
+        continuously. Usually I bind the Nginx access and error logs to <code
+        >/dev/null</code>, but recently this changed, as I am monitoring them
+        for anomalous requests from bots.
+      </p>
+
+      <p>
+        This site is served via Nginx from my home by a mini computer with an
+        Intel® Celeron® J4105 and 8 GB of memory. I use the server to self-host
+        various services such as <a href="https://freshrss.org/">FreshRSS</a> at
+        <a href="https://feed.ormai.me">feed.ormai.me</a>, a <a
+          href="https://forgejo.org/"
+        >Forgejo</a>
+        instance at <a href="https://git.ormai.me">git.ormai.me</a>, a
+        CalDav/CardDav service with <a href="https://radicale.org/v3.html"
+        >Radicale</a> at <a href="https://ormai.me/radicale"
+        >ormai.me/radicale</a>, and a <a href="https://matrix.org/">Matrix</a>
+        server with <a href="https://continuwuity.org/">Continuwuity</a>. The
+        setup is pretty home-made, with the server being behind <abbr
+          title="Network Address Translation"
+        >NAT</abbr> and without a static <abbr title="Internet Protocol"
+        >IP</abbr> address (I use a custom script for dynamic <abbr
+          title="Domain Name System"
+        >DNS</abbr>).
+      </p>
+
+      <footer style="text-align: center;">
+        © <a href="https://ormai.me">Mario D'Andrea</a>
+        2023-2025 · This work is licensed under
+        <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
+        >CC BY-NC-SA 4.0</a>
+      </footer>
+    </article>
+  </body>
+</html>
