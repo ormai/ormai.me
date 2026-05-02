@@ -18,7 +18,7 @@
         ex sapien vitae pellentesque sem placerat. In id cursus mi pretium
         tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.
         Pulvinar vivamus fringilla lacus nec metus bibendum egestas.
-        <sub><a href="#fn1">1</a></sub>
+        <sub><a id="ref1" href="#note1">1</a></sub>
         Iaculis massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit
         semper vel class aptent <i>taciti</i>
         sociosqu. Ad litora torquent per conubia nostra inceptos himenaeos.
@@ -55,7 +55,8 @@
 
       <p>
         Lorem ipsum dolor sit amet consectetur adipiscing elit.<sub><a
-            href="#fn2"
+            id="ref2"
+            href="#note2"
           >2</a></sub>
         Quisque faucibus ex sapien vitae pellentesque sem placerat. In id cursus
         mi pretium tellus duis convallis. Tempus leo eu aenean sed diam urna
@@ -65,7 +66,7 @@
         torquent per conubia nostra inceptos himenaeos.
       </p>
 
-      <pre><code>fn main() {
+      <pre class="codeblock"><code>fn main() {
     println!("hello world");
 }</code></pre>
 
@@ -73,7 +74,7 @@
         Lorem ipsum dolor sit amet consectetur adipiscing elit. Quisque faucibus
         ex sapien vitae pellentesque sem placerat. In id cursus mi pretium
         tellus duis convallis. Tempus leo eu aenean sed diam urna tempor.
-        <sub><a href="#fn3">3</a></sub>
+        <sub><a id="ref3" href="#note3">3</a></sub>
         Pulvinar vivamus fringilla lacus nec metus bibendum egestas. Iaculis
         massa nisl malesuada lacinia integer nunc posuere. Ut hendrerit semper
         vel class aptent taciti sociosqu. Ad litora torquent per conubia nostra
@@ -83,17 +84,20 @@
       <hr>
 
       <ol>
-        <li id="#fn1">
-          Lorem ipsum dolor sit amet consectetur adipiscing elit.
+        <li id="note1">
+          Lorem ipsum dolor sit amet consectetur adipiscing elit. <a
+            href="#ref1"
+          >↩︎</a>
         </li>
-        <li id="#fn2">
+        <li id="note2">
           Mus donec rhoncus eros lobortis nulla molestie mattis.
+          <a href="#ref2">↩︎</a>
         </li>
-        <li id="#fn3">
+        <li id="note3">
           Cubilia curae hac habitasse platea dictumst lorem ipsum.
+          <a href="#ref3">↩︎</a>
         </li>
       </ol>
-
       <p>
         <a href="mailto:mgdandrea@proton.me?subject=Comment: Lorem Ipsum"
         >Comment via email</a>
@@ -102,12 +106,9 @@
 
     <footer>
       © <a href="https://ormai.me">Mario D'Andrea</a>
-      2023-2025 · This work is licensed under
+      2023-2026 · This work is licensed under
       <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
       >CC BY-NC-SA 4.0</a>
-      · This site <a href="https://git.ormai.me/ormai/ormai.me">source code</a>
-      is licensed under <a href="https://www.gnu.org/licenses/agpl-3.0.en.html"
-      >AGPL</a>.
     </footer>
   </body>
 </html>
