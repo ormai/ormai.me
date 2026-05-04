@@ -3,7 +3,7 @@
     --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
   }
 
-  /* The filter inverts the color of the alt text, making it unreadable, this is a fix. */
+  /* The filter above inverts the color of the alt text, making it unreadable, this is a fix. */
   a:has(img),
   a:has(img):hover {
     color: var(--color-bg);
@@ -12,13 +12,14 @@
 
 html {
   color-scheme: light dark;
-  --color-fg: light-dark(#111, #ddd);
-  --color-bg: light-dark(#fff, #181617);
+  --color-fg: light-dark(#191817, OldLace);
+  --color-fg-dim: light-dark(DimGray, LightGray);
+  --color-bg: light-dark(WhiteSmoke, #171819);
+  --roundness: 6px;
   color: var(--color-fg);
   background: var(--color-bg);
 
   height: 100%;
-  font-size: 16px;
   font-family: sans-serif;
 }
 
@@ -52,22 +53,25 @@ video {
 
 /* Text container */
 .container {
-  max-width: min(70ch, 100% - 2.5em);
+  max-width: min(70ch, 100% - 1.5rem);
   margin-inline: auto;
 
   p {
-    line-height: 1.5;
+    line-height: 1.4;
   }
 }
 
 article {
   flex-grow: 1;
+  margin-top: 1rem;
 }
 
 footer {
-  padding: 3mm 0;
-  font-size: 0.9em;
-  filter: brightness(0.6);
+  padding: 3rem 0 0.7rem;
+  font-size: 0.8em;
+  line-height: 1.3rem;
+  color: var(--color-fg-dim);
+  text-align: center;
 }
 
 .col {
@@ -121,23 +125,57 @@ footer {
   user-select: none;
 }
 
+/* These components are displayed inline. To stand out from text they are indented and have vertical margin. */
+.codeblock,
+.quote {
+  margin: 1rem 2rem;
+}
+
+.codeblock {
+  padding: 14px;
+  background: light-dark(LightGoldenrodYellow, DarkSlateGray);
+  border-radius: var(--roundness);
+}
+
 /* Structure of a quotation. Blockquote may contain multiple paragrpahs
    - div.quote
      - blockquote
      - span
        - cite */
 .quote {
-  border-left: var(--color-fg) solid .2em;
+  border-left: var(--color-fg) solid 4px;
   display: flex;
   flex-direction: column;
-  gap: .7em;
-  padding: .5em 0 .5em 1em;
+  gap: 0.8rem;
+  padding: 0.3rem 0 0.3rem 0.6rem;
   font-family: serif;
-  margin: 0 2em;
 
   blockquote {
     font-style: italic;
     font-size: 1.1em;
     margin: 0;
   }
+}
+
+a {
+  transition: color ease-in-out 120ms;
+
+  --anchor: light-dark(Olive, MediumSpringGreen);
+  color: var(--color-fg);
+
+  &:visited {
+    color: hsl(from var(--color-fg) h s l);
+  }
+
+  &:hover {
+    color: hsl(from var(--anchor) h s calc(l - 10));
+  }
+
+  &:active {
+    color: hsl(from var(--anchor) h s calc(l + 10));
+  }
+}
+
+::selection {
+  background: hsl(from light-dark(Coral, Sienna) h s l / 0.4);
 }
