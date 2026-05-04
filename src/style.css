@@ -16,6 +16,7 @@ html {
   --color-fg-dim: light-dark(DimGray, LightGray);
   --color-bg: light-dark(WhiteSmoke, #171819);
   --roundness: 6px;
+  --target-bg: hsl(from coral h s l / 0.5);
   color: var(--color-fg);
   background: var(--color-bg);
 
@@ -160,12 +161,13 @@ footer {
 a {
   transition: color ease-in-out 120ms;
 
-  --anchor: light-dark(Olive, MediumSpringGreen);
   color: var(--color-fg);
 
   &:visited {
     color: hsl(from var(--color-fg) h s l);
   }
+
+  --anchor: light-dark(Olive, MediumSpringGreen);
 
   &:hover {
     color: hsl(from var(--anchor) h s calc(l - 10));
@@ -178,4 +180,26 @@ a {
 
 ::selection {
   background: hsl(from light-dark(Coral, Sienna) h s l / 0.4);
+}
+
+*:target {
+  animation: highlightFade 2s ease forwards;
+  border-radius: 3px;
+}
+
+@keyframes highlightFade {
+  0% {
+    background-color: var(--target-bg);
+    box-shadow: 0 0 0 4px var(--target-bg);
+  }
+
+  60% {
+    background-color: var(--target-bg);
+    box-shadow: 0 0 0 4px var(--target-bg);
+  }
+
+  100% {
+    background-color: initial;
+    box-shadow: 0 0 0 4px transparent;
+  }
 }
