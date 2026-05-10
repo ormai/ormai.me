@@ -11,6 +11,9 @@ server {
         if ($http_user_agent ~* "git/|git-lfs/") {
             set $bypass_cookie 1;
         }
+        if ($request_uri ~ ^/api/actions/runner\.v1\.RunnerService/) {
+            set $bypass_cookie 1;
+        }
         if ($cookie_crawl_away_bad_bot = "1") {
             set $bypass_cookie 1;
         }
