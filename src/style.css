@@ -11,17 +11,21 @@
 }
 
 html {
-  color-scheme: light dark;
   --color-fg: light-dark(#191817, OldLace);
   --color-fg-dim: light-dark(DimGray, LightGray);
   --color-bg: light-dark(WhiteSmoke, #171819);
   --roundness: 6px;
   --target-bg: hsl(from coral h s l / 0.5);
+  color-scheme: light dark;
   color: var(--color-fg);
   background: var(--color-bg);
 
+  --sans: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+  --serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --mono: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
+  font-family: var(--sans);
+
   height: 100%;
-  font-family: sans-serif;
 }
 
 body {
@@ -121,7 +125,6 @@ footer {
   gap: 5rem;
 }
 
-
 .no-select {
   user-select: none;
 }
@@ -138,23 +141,31 @@ footer {
   border-radius: var(--roundness);
 }
 
+code {
+  font-family: var(--mono);
+}
+
 /* Structure of a quotation. Blockquote may contain multiple paragrpahs
    - div.quote
      - blockquote
      - span
        - cite */
 .quote {
-  border-left: var(--color-fg) solid 4px;
+  border-left: var(--color-fg) solid 3px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   padding: 0.3rem 0 0.3rem 0.6rem;
-  font-family: serif;
+  font-family: var(--serif);
 
   blockquote {
     font-style: italic;
-    font-size: 1.1em;
+    font-size: 1.1rem;
     margin: 0;
+  }
+
+  span::before {
+    content: "— ";
   }
 }
 
@@ -182,9 +193,8 @@ a {
   background: hsl(from light-dark(Coral, Sienna) h s l / 0.4);
 }
 
-*:target {
+:target {
   animation: highlightFade 2s ease forwards;
-  border-radius: 3px;
 }
 
 @keyframes highlightFade {

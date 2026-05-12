@@ -1,6 +1,15 @@
 words = [
+    "adwaita",
+    "avenir",
+    "cantarell",
+    "consolas",
     "darkmagenta",
     "fediverse",
     "forgejo",
+    "ltr",
+    "lucida",
+    "menlo",
+    "noto",
     "ormai",
+    "segoe",
 ]
