@@ -5,11 +5,13 @@
   },
   "markdown": {
   },
-  "toml": {
+  "markup": {
+    "printWidth": 100
   },
   "excludes": [
     "**/node_modules",
-    "**/*-lock.json"
+    "**/*-lock.json",
+    "target/"
   ],
   "plugins": [
     "https://plugins.dprint.dev/typescript-0.95.13.wasm",
