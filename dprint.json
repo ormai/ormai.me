@@ -1,13 +1,9 @@
 {
-  "typescript": {
-  },
-  "json": {
-  },
-  "markdown": {
-  },
   "markup": {
-    "printWidth": 100
+    "indentWidth": 2,
+    "printWidth": 120
   },
+  "includes": ["**/*.{ts,js,json,svelte,css,yaml,yml,html}", "**/Dockerfile", "**/*.dockerignore"],
   "excludes": [
     "**/node_modules",
     "**/*-lock.json",

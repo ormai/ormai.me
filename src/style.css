@@ -10,6 +10,11 @@
   }
 }
 
+@page {
+   size: A4;
+   margin: 2cm;
+}
+
 html {
   --color-fg: light-dark(#191817, OldLace);
   --color-fg-dim: light-dark(DimGray, LightGray);
@@ -72,11 +77,13 @@ article {
 }
 
 footer {
-  padding: 3rem 0 0.7rem;
-  font-size: 0.8em;
-  line-height: 1.3rem;
-  color: var(--color-fg-dim);
+  display: flex;
+  justify-content: space-between;
+  margin: 2rem 0 0.7rem;
+  padding: 0.8rem 0;
+  line-height: 1.5rem;
   text-align: center;
+  border-top: 1px dashed grey;
 }
 
 .col {
@@ -187,6 +194,10 @@ a {
   &:active {
     color: hsl(from var(--anchor) h s calc(l + 10));
   }
+}
+
+.numeric {
+  font-variant-numeric: tabular-nums slashed-zero;
 }
 
 ::selection {
