@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Getting to know ZFS</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Getting to know ZFS">
+    <meta
+      property="og:description"
+      content="ZFS introduced from the perspective of someone who wants to bring online a domestic storage pool, with parity and encryption."
+    >
+    <meta
+      property="description"
+      content="ZFS introduced from the perspective of someone who wants to bring online a domestic storage pool, with parity and encryption."
+    >
+    <meta property="og:image" content="https://ormai.me/getting-to-know-zfs/after-the-harvest-cover.webp">
+    <meta property="og:image:alt" content="Article cover">
+    <meta property="og:url" content="https://ormai.me">
+    <meta property="og:site_name" content="Mario D'Andrea">
+    <meta property="og:type" content="article">
+    <meta property="article:author" content="Mario D'Andrea">
+    <meta property="article:tag" content="self-host">
+    <meta property="article:tag" content="Linux">
+    <meta property="article:published_time" content="2026-09-02T09:25">
+    <!-- <meta property="article:modified_time" content="2026-09-02T12:00"> -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/style.css?v=1">
+  </head>
+
+  <body class="col container">
+    <article>
+      <h1 id="getting-to-know-zfs">Getting to know ZFS</h1>
+
+      <p>
+        <i>ZFS, introduced from the perspective of someone who wants to bring online a domestic storage pool, with
+          parity and encryption.</i>
+      </p>
+
+      <figure class="cover">
+        <img
+          alt="A painting showing a man and a woman cleaning and cutting what they harvested. There are cabbages, pumpkins, grapes and other things, all scattered around them. In the back there is a man standing, probably using a well while petting a cat. Further back there is a wooden house with another cat sitting on the doorstep."
+          src="after-the-harvest.webp"
+          title="Me sifting through my files"
+        >
+        <figcaption>
+          <cite><a href="https://archive.org/details/after-the-harvest-endlos">After the Harvest</a></cite>
+        </figcaption>
+      </figure>
+
+      <p>
+        <span class="drop-cap">H</span><span class="small-caps">aving</span> all my <abbr title="Solid State Drive"
+        >SSD</abbr>s <a href="https://www.marginalia.nu/log/a_139_hdd/">constantly almost full</a>, despite the <a
+          href="https://web.archive.org/web/20260828145645/https://diskprices.com/?locale=it"
+        >high storage prices</a> in this period, I’ve decided to get myself more storage. This time I wanted to have
+        redundancy, since I have already been victim of those dreadful <abbr title="Input/Output">I/O</abbr> errors that
+        <code><a href="https://man.archlinux.org/man/dmesg.1">dmesg(1)</a></code> writes in red. So I got a hard drive
+        bay with five 3.5″ <abbr title="Serial Advanced Technology Attachment">SATA</abbr> slots, with its own cooling
+        fan and power supply, and three refurbished 1 TB “WD Blue” hard drives<a
+          href="#fn1"
+          class="footnote-ref"
+          id="fnref1"
+          role="doc-noteref"
+        ><sup>1</sup></a>. Nothing special, just enough to get started. If storage prices will ever fall back down<a
+          href="#fn2"
+          class="footnote-ref"
+          id="fnref2"
+          role="doc-noteref"
+        ><sup>2</sup></a>, I plan to buy bigger drives.
+      </p>
+
+      <p>
+        While perusing the <a href="https://wiki.archlinux.org/title/Main_page">ArchWiki</a> in search of a way to make
+        use of this setup, after discarding <a href="https://en.wikipedia.org/wiki/Btrfs">Btrfs</a> because its <abbr
+          title="Redundant Array of Inexpensive Disks"
+        >RAID</abbr> implementation is <a
+          href="https://wiki.archlinux.org/index.php?title=Btrfs&amp;oldid=883029#Multi-device_file_system"
+        >“fatally flawed”</a> along with RAID5 and its <a
+          href="https://wiki.archlinux.org/title/RAID#Standard_RAID_levels"
+        >unrecoverable read errors</a>, I finally stumbled upon ZFS. Originally I was thinking about using RAID5 with <a
+          href="https://man.archlinux.org/man/core/mdadm/mdadm.8.en"
+        ><code>mdadm(8)</code></a>
+        and on top of that <a href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup#LUKS2">LUKS2</a>, and finally
+        top of that maybe ext4<a
+          href="#fn3"
+          class="footnote-ref"
+          id="fnref3"
+          role="doc-noteref"
+        ><sup>3</sup></a>, but ZFS takes care of all of it: it works with multiple disks, has native encryption, and is
+        itself the file system.
+      </p>
+
+      <p>
+        The plan is to attach this storage pool to <a href="/colophon/#hosting-and-other-services">my home server</a>
+        running Debian 13
+        <em>trixie</em>, so that I can access it through <abbr title="Secure SHell">SSH</abbr> or by mounting the
+        storage with <a href="https://apps.gnome.org/Nautilus/">Gnome Files</a>
+        and use it via <abbr title="Secure File Transfer protocol, also known as FTP over SSH">SFTP</abbr>.
+      </p>
+
+      <h2 id="zfs-concepts">ZFS concepts</h2>
+
+      <p>
+        ZFS is a <strong>copy-on-write</strong> file system. It is structured like a <a
+          href="https://en.wikipedia.org/wiki/Tree_(graph_theory)"
+        >tree</a>, with data residing in its leaves, pointed at by block pointers containing also the size and the
+        <strong>checksum</strong> of the child. When writing nothing is ever overwritten: the write happens to free
+        space and the pointer of the parent is updated to point to the written data along with the newly calculated
+        checksum of the child. This is repeated from child to parent until the root of the tree (the <em>überblock</em>,
+        from which everything else is reachable) is reached. Until the überblock is updated nothing has changed, the
+        chain of pointers still points to valid data. The überblock is not overwritten either, a copy is added to a <a
+          href="https://en.wikipedia.org/wiki/Circular_buffer"
+        >ring</a> that cycles. This last switch of the überblock is one <em>atomic</em> operation.<a
+          href="#fn4"
+          class="footnote-ref"
+          id="fnref4"
+          role="doc-noteref"
+        ><sup>4</sup></a> Pretty cool eh?
+      </p>
+
+      <p>
+        From this crucial aspect a lot of consequences follow: a ZFS pool is always consistent and there is no need for
+        <code><a href="https://man.archlinux.org/man/fsck.8">fsck(8)</a></code>; creating snapshots and clones is cheap
+        because the old tree is already there; checksums are useful to detect data corruptions, and to automatically
+        repair them if there is redundancy. This is done with <code><a
+            href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-scrub.8.html"
+          >zpool-scrub(8)</a></code>
+        and <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-resilver.8.html"
+          >zpool-resilver(8)</a></code>. Of course copy-on-write has its costs, like the fact that stuff is being
+        copied. Rewriting stuff will also scatter the blocks around (fragmentation), which will slow down accesses,
+        especially if the pool is almost full.
+      </p>
+
+      <h3 id="anatomy-of-a-pool">Anatomy of a pool</h3>
+
+      <p>
+        ZFS operates on a hierarchy of virtual devices (VDEVs). The root VDEV is the pool itself. The pool is a
+        <em>unit</em> made up of top-level VDEVs. These are groups of physical (leaf) VDEVs or single devices; at this
+        level RAIDZ or mirroring happens. ZFS <a href="https://en.wikipedia.org/wiki/Data_striping">stripes data</a>
+        across all the top-level VDEVs of the pool, so if a single top-level VDEV is lost the whole pool is lost. Thus
+        its riskier to have single devices as top-level VDEVs as there is no redundancy. Striping allows reading data
+        from multiple drives at once concurrently, thus increasing throughput. ZFS also supports using special devices
+        as cache or to store metadata.
+      </p>
+
+      <p>
+        RAIDZ<var>N</var> is ZFS’s implementation of RAID, where <var>N</var> is the number of devices that can fail
+        without losing data, it's also called the <em>parity</em> of the pool. RAIDZ solves the <em>write hole
+          problem</em>, which causes unreadable data errors after a power loss.
+      </p>
+
+      <h2 id="doing-the-thing">Doing the thing</h2>
+
+      <p>
+        Having somewhat an idea of how all these concepts fit together, I installed ZFS on Debian, following the
+        project’s instructions. The packages are:
+      </p>
+
+      <ul>
+        <li>
+          <code>zfs-dkms</code>: the Linux kernel module source code for the ZFS file system. The module is compiled
+          first, then loaded dynamically by the kernel because OpenZFS has a license that is incompatible with that of
+          the Linux kernel. For this reason they are not shipped together, and ZFS is called an <em>out-of-tree</em>
+          component.
+        </li>
+        <li>
+          <code>zfs-utils</code>: contains the userland software and tools to interact with the file-system. The two
+          important tools are
+          <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool.8.html">zpool(8)</a></code> to manage
+          pools and <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zfs.8.html">zfs(8)</a></code> to
+          manage datasets.
+        </li>
+      </ul>
+
+      <h3 id="creating-the-pool">Creating the pool</h3>
+
+      <p>
+        Note: the pool should be created on the system where it is intended to be used. Otherwise, it’s possible to move
+        pools across systems by using
+        <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-export.8.html"
+          >zpool-export(8)</a></code> and <code><a
+            href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-import.8.html"
+          >zpool-import(8)</a></code>. The latter is able to discover and import available pools.
+      </p>
+
+      <p>
+        To create a RAIDZ1 pool, <code>zpool</code> expects all the devices to be of the same size, to not be a mix of
+        disks and files or of redundant and non redundant top-level VDEVs. The command receives the structure of the
+        pool, it can take file, partitions and disks, can groups devices in mirrors, RAIDZ, or have them non redundant.
+        Disks don’t need to be formatted, in my case they had a NTFS partition that was causing the program to return
+        with an error. After deleting the partitions with <code><a href="https://man.archlinux.org/man/fdisk.8"
+          >fdisk(8)</a></code> the command succeeded without the need to use the <code>-f</code>
+        option. For a pool of less than 10 devices, OpenZFS <a
+          href="https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html#selecting-dev-names-when-creating-a-pool-linux"
+        >recommends using ID names</a> to identify disks, as these are persistent (at least for disks). Using instead
+        device names like <code>sda</code>,
+        <code>sdb</code>, and so on, may cause detection failures by ZFS. The pool I’m creating is called <code
+        >tank</code>
+        and consists of a single RAIDZ1 top-level VDEV grouping three SATA devices (not partitions).
+        <code>ashift=12</code> sets the sector size property to 4096 bytes, which <a
+          href="https://wiki.archlinux.org/title/ZFS#Advanced_Format_disks"
+        >is indicated even for disks with a physical sector size of 512 bytes</a>.
+      </p>
+
+      <pre><code><span class="special">#</span> <span class="sh-command">zpool</span> create <span class="sh-option">-o</span> ashift=12 tank raidz1 \
+    ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M1APMC \
+    ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M80DFU \
+    ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M6T4J7</code></pre>
+
+      <p>
+        <a href="#fn5" class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a> Now, checking if the pool
+        exists
+      </p>
+
+      <pre><code><span class="special">$</span> <span class="sh-command">zpool</span> status
+  pool: tank
+ state: ONLINE
+config:
+
+    NAME                                          STATE     READ WRITE CKSUM
+    tank                                          ONLINE       0     0     0
+      raidz1-0                                    ONLINE       0     0     0
+        ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M1APMC  ONLINE       0     0     0
+        ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M80DFU  ONLINE       0     0     0
+        ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M6T4J7  ONLINE       0     0     0
+
+errors: No known data errors</code></pre>
+      <p>and if it is mounted</p>
+
+      <pre><code><span class="special">$</span> <span class="sh-command">mount</span>
+tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
+
+      <p>
+        I can also see that a <code>tank.mount</code> <a href="https://systemd.io/">SystemD</a> unit appeared. Nice.
+      </p>
+
+      <h3 id="creating-a-dataset">Creating a dataset</h3>
+
+      <p>
+        Now we have a pool, mounted at <code>/tank</code>, a directory/file hierarchy can be created directly there. But
+        it may be better to use datasets instead, especially to benefit from encryption. In ZFS a dataset has a <code
+        >type</code>, without specifying <code>-V &lt;size&gt;</code>
+        we just create a <em>file system</em> (as opposed to a <em>volume</em>), which behaves like other file systems,
+        can be mounted, and so on. The
+        <code>keyformat=passphrase</code> property expects 8–512 bytes of data for the passphrase. I’m mounting the
+        dataset under <code>$HOME</code> so that it can’t be read by users who are not me nor <code>root</code>, or are
+        not in the group of my user, since it has permissions
+        <code>0750</code>. I’m also disabling auto-mounting both by ZFS and SystemD, because it wouldn’t be ideal to
+        interrupt boot to prompt for the passphrase since this machine is supposed to be connected to remotely. Doing it
+        at log-in time <a href="https://wiki.archlinux.org/index.php?title=ZFS&amp;oldid=882715#SSH"
+        >doesn’t seems ideal either with SSH</a>. So the command is
+      </p>
+
+      <pre><code><span class="special">#</span> <span class="sh-command">zfs</span> create <span class="sh-option">-o</span> mountpoint=&quot;$HOME/secret&quot; <span class="sh-operator">\</span>
+    <span class="sh-option">-o</span> canmount=noauto <span class="sh-option">-o</span> org.openzfs.systemd:ignore=on <span class="sh-operator">\</span> 
+    <span class="sh-option">-o</span> encryption=on <span class="sh-option">-o</span> keyformat=passphrase <span class="sh-operator">\</span>
+    tank/secret</code></pre>
+
+      <p>
+        running it with the options <code>-n -v</code> won’t create anything, only validate it (<em>no-op</em>, dry
+        run). Actually running the command prompts to enter the passphrase. After that the dataset should be created:
+      </p>
+
+      <pre><code><span class="special">$</span> <span class="sh-command">zfs</span> list <span class="sh-option">-o</span> name,used,avail,refer,mountpoint,canmount,encryption,keystatus
+NAME          USED  AVAIL  REFER  MOUNTPOINT          CANMOUNT  ENCRYPTION   KEYSTATUS
+tank         1018K  1.75T   128K  /tank               on        off          -
+tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  available</code></pre>
+
+      <p>
+        <code>zfs mount</code> can also be used to see the currently mounted datasets. If everything goes well ZFS
+        created the mount point at
+        <code>~/secret</code>, but by default it is owned by <code>root</code>. To fix that
+      </p>
+
+      <pre><code><span class="special">$</span> <span class="sh-command">sudo</span> chown <span class="sh-option">-R</span> mario:mario <span class="sh-path">~/secret</span> <span class="sh-operator">&amp;&amp;</span> <span class="sh-command">chmod</span> 0700 <span class="sh-path">~/secret</span></code></pre>
+
+      <p>
+        Since auto-mounting is disabled, to use the dataset I run
+        <code>sudo zfs load-key tank/secret &amp;&amp; sudo zfs mount tank/secret</code>, and when I’m done with it I
+        can just run
+        <code>sudo zfs unmount tank/secret &amp;&amp; sudo zfs unload-key tank/secret</code>
+        (notice the inverse order), or leave it mounted until shutdown or reboot.
+      </p>
+
+      <figure>
+        <img
+          alt="Screenshot of Gnome Files showing the dataset accessed through SFTP"
+          src="nautilus-screenshot.webp"
+        >
+        <figcaption>
+          Screenshot of Gnome Files showing the dataset accessed through SFTP, after having moved some files in.
+        </figcaption>
+      </figure>
+
+      <h2 id="conclusion">Conclusion</h2>
+
+      <p>
+        This article was born from notes about ZFS concepts and a sort of journal of the things I did and the commands I
+        run to set up this storage. ZFS seems pretty straightforward to use, its documentation is helpful, I hope to
+        gather more knowledge and experience on it now that I started using it.
+      </p>
+
+      <p>
+        This is not intended as a self contained guide. If you want to use ZFS, you should read the <a
+          href="https://openzfs.github.io/openzfs-docs/Getting%20Started/index.html"
+        >OpenZFS documentation</a> and the manual pages: there are features, operations, and other types of uses that I
+        omitted. The ArchWiki is also a good resource.
+      </p>
+
+      <p>
+        Finally, I regret to have to state that I did <em>not</em> use <abbr title="Artificial Intelligence">AI</abbr>,
+        <abbr title="Large Language Model">LLM</abbr>s, diffusion models, etc. to do any of this, not even to <em>just
+          have it explain things to me</em>.
+      </p>
+
+      <section id="footnotes" class="footnotes">
+        <hr>
+        <ol>
+          <li id="fn1">
+            <p>
+              I probably could have bought one 4 TB drive for a bit more of what I spent for those, but since the points
+              of failures are the single physical drives, I need more than one to have <em>parity</em>. <a
+                href="#fnref1"
+                class="footnote-back"
+              >↩︎</a>
+            </p>
+          </li>
+          <li id="fn2">
+            <p>
+              At the time of writing (2026-08-26), a brand new 16 TB Seagate IronWolf costs €688 on Amazon. For
+              comparison, on 2025-08-26 the same drive was priced at €309, so a 125.7% increase in one year. <a
+                href="#fnref2"
+                class="footnote-back"
+              >↩︎</a>
+            </p>
+          </li>
+          <li id="fn3">
+            <p>
+              I actually don’t now if this setup is feasible, or at all recommended. I did not follow through. <a
+                href="#fnref3"
+                class="footnote-back"
+              >↩︎</a>
+            </p>
+          </li>
+          <li id="fn4">
+            <p>
+              Cfr. <a href="https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Copy-on-write.html"
+              >Basic Concepts, Copy-on-Write</a>. <a
+                href="#fnref4"
+                class="footnote-back"
+              >↩︎</a>
+            </p>
+          </li>
+          <li id="fn5">
+            <p>
+              A note about notation (even though it is a widespread convention): a command issued when the prompt is the
+              symbol <code>#</code> indicates that the command is being run as <code>root</code>, while the prompt <code
+              >$</code> means that the command is being run by an unpriviledged user. <a
+                href="#fnref5"
+                class="footnote-back"
+              >↩︎</a>
+            </p>
+          </li>
+        </ol>
+      </section>
+    </article>
+
+    <footer class="row">
+      <span>© Mario G. D'Andrea</span> <div class="row gap08">
+        <a href="/colophon">ℹ️ Colophon</a> <a href="/">🏠 Home</a> <a href="#">☝️ Top</a>
+      </div>
+    </footer>
+  </body>
+</html>

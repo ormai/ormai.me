@@ -21,6 +21,7 @@ html {
   --color-bg: light-dark(WhiteSmoke, #171819);
   --roundness: 6px;
   --target-bg: hsl(from coral h s l / 0.5);
+  --code-bg: light-dark(PapayaWhip, DarkSlateGray);
   color-scheme: light dark;
   color: var(--color-fg);
   background: var(--color-bg);
@@ -54,7 +55,7 @@ h6 {
   overflow-wrap: break-word;
 }
 
-h2,h2,h3,h4,h5,h6 {
+h1,h2,h3,h4,h5,h6 {
   margin-block: 0.9em 0.5em;
 }
 
@@ -75,19 +76,61 @@ video {
   display: block;
 }
 
+article {
+  flex-grow: 1;
+  margin-top: 1rem;
+
+  .cover {
+    margin-left: 2.5em;
+    margin-right: 2.5em;
+    margin-bottom: 3em;
+  }
+}
+
 /* Text container */
 .container {
   max-width: min(70ch, 100% - 1.5rem);
   margin-inline: auto;
 
   p, li {
-    line-height: 1.4;
+    line-height: 1.5em;
   }
 }
 
-article {
-  flex-grow: 1;
-  margin-top: 1rem;
+@media (max-width: calc(70ch * 2)) {
+  .table-of-content {
+    display: none;
+  }
+}
+
+hr {
+  border: solid 0.5px gray;
+  border-radius: 5px;
+}
+
+.footnotes {
+  margin: 2.5em 0 1em 0;
+}
+
+ol, ul {
+  padding-inline-start: 2em;
+}
+
+@media (max-width: 70ch) {
+  figure {
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
+  }
+}
+
+figure figcaption {
+  margin-top: 0.4em;
+  font-size: 0.82em;
+  line-height: 1em;
+}
+
+figure {
+  margin: 1.8em 1.5em;
 }
 
 footer {
@@ -151,19 +194,47 @@ footer {
 }
 
 /* These components are displayed inline. To stand out from text they are indented and have vertical margin. */
-.codeblock,
 .quote {
   margin: 1rem 2rem;
 }
 
-.codeblock {
-  padding: 14px;
-  background: light-dark(LightGoldenrodYellow, DarkSlateGray);
-  border-radius: var(--roundness);
-}
-
 code {
   font-family: var(--mono);
+}
+
+pre:has(>code) {
+  padding: 0.8em;
+  border-radius: var(--roundness);
+  overflow-x: auto;
+  background: var(--code-bg);
+
+  .special {
+    color: light-dark(DarkOrchid, Thistle);
+  }
+
+  .sh-option {
+    color: light-dark(Firebrick, Gold);
+    font-style: italic;
+  }
+
+  .sh-command {
+    color: light-dark(Navy, SkyBlue);
+    font-weight: 600;
+  }
+
+  .sh-path {
+    color: light-dark(Green, MediumSpringGreen);
+  }
+
+  .sh-operator {
+    color: light-dark(Sienna, NavajoWhite);
+  }
+}
+
+:not(pre) code {
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+  background: var(--code-bg);
 }
 
 /* Structure of a quotation. Blockquote may contain multiple paragrpahs
@@ -210,6 +281,17 @@ a {
   }
 }
 
+.drop-cap {
+  float: inline-start;
+  font-size: 4.8em;
+  line-height: 0.9em;
+  margin-right: 0.13em;
+}
+
+.small-caps {
+  font-variant: small-caps;
+}
+
 .numeric {
   font-variant-numeric: tabular-nums slashed-zero;
 }
@@ -219,7 +301,7 @@ a {
 }
 
 :target {
-  animation: highlightFade 2s ease forwards;
+  animation: highlightFade 3s ease forwards;
 }
 
 @keyframes highlightFade {
@@ -228,7 +310,7 @@ a {
     box-shadow: 0 0 0 4px var(--target-bg);
   }
 
-  60% {
+  50% {
     background-color: var(--target-bg);
     box-shadow: 0 0 0 4px var(--target-bg);
   }
