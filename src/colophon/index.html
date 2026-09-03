@@ -5,15 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow">
-    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/style.css" media="screen">
     <meta property="og:site_name" content="Mario D'Andrea">
     <meta property="og:title" content="Colophon">
-    <meta property="og:image" content="/assets/ormai.jpg">
+    <meta property="og:image" content="https://ormai.me/ormai.webp">
     <meta property="og:url" content="ormai.me">
     <meta property="og:type" content="website">
     <meta property="og:description" content="How this site is made">
     <meta name="fediverse:creator" content="@ormai@mas.to">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="/style.css" media="screen">
   </head>
   <body class="col container">
     <article>
@@ -46,11 +46,9 @@
       <h2>Privacy and cookies</h2>
 
       <p>
-        As a principle, this website doesn't set third-party cookies or runs code for analytical purposes. At the time
-        of writing, only one cookie is set as a countermeasure for aggressive web scrapers, but that might change in the
-        near feature, as the <abbr title="Artificial Intelligence">AI</abbr> hell-scape we live in evolves rapidly and
-        continuously. Usually I bind the Nginx access and error logs to <code>/dev/null</code>, but recently this
-        changed, as I am monitoring them for anomalous requests from bots.
+        As a principle, this website doesn't set third-party cookies or runs code for analytical purposes. Your browser
+        is basically downloading a bunch of files from my server and presenting them to you. Nothing is sent back. Both
+        the Nginx access and error logs are bound to <code>/dev/null</code>.
       </p>
 
       <h2 id="hosting-and-other-services">Hosting and other services</h2>
