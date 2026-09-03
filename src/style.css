@@ -76,6 +76,12 @@ video {
   display: block;
 }
 
+input, select {
+  border-radius: 0.3em;
+  border: solid 1px gray;
+  padding: 0.2em 0.4em;
+}
+
 article {
   flex-grow: 1;
   margin-top: 1rem;
@@ -123,14 +129,19 @@ ol, ul {
   }
 }
 
-figure figcaption {
-  margin-top: 0.4em;
-  font-size: 0.82em;
-  line-height: 1em;
-}
 
 figure {
   margin: 1.8em 1.5em;
+
+  figcaption {
+    margin-top: 0.4em;
+    font-size: 0.82em;
+    line-height: 1em;
+  }
+
+  img {
+    border-radius: 0.2em;
+  }
 }
 
 footer {
