@@ -1,3 +1,24 @@
+html {
+  --accent: light-dark(SandyBrown, Sienna);
+  --foreground: light-dark(#191817, OldLace);
+  --foreground-dim: light-dark(DimGray, Silver);
+  --background: light-dark(WhiteSmoke, #171819);
+  --roundness: 6px;
+  --code-background: light-dark(PapayaWhip, DarkSlateGray);
+  --target-bg: hsl(from var(--accent) h s l);
+  color-scheme: light dark;
+  color: var(--foreground);
+  background: var(--background);
+
+  --sans: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
+  --serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+  --mono: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
+  font-family: var(--sans);
+  height: 100%;
+
+  scrollbar-color: var(--accent) var(--background);
+}
+
 @media (prefers-color-scheme: dark) {
   html {
     --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
@@ -6,7 +27,7 @@
   /* The filter above inverts the color of the alt text, making it unreadable, this is a fix. */
   a:has(img),
   a:has(img):hover {
-    color: var(--color-bg);
+    color: var(--background);
   }
 }
 
@@ -15,24 +36,6 @@
    margin: 2cm;
 }
 
-html {
-  --color-fg: light-dark(#191817, OldLace);
-  --color-fg-dim: light-dark(DimGray, LightGray);
-  --color-bg: light-dark(WhiteSmoke, #171819);
-  --roundness: 6px;
-  --target-bg: hsl(from coral h s l / 0.5);
-  --code-bg: light-dark(PapayaWhip, DarkSlateGray);
-  color-scheme: light dark;
-  color: var(--color-fg);
-  background: var(--color-bg);
-
-  --sans: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
-  --serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-  --mono: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
-  font-family: var(--sans);
-
-  height: 100%;
-}
 
 body {
   height: 100%;
@@ -116,6 +119,22 @@ hr {
 
 .footnotes {
   margin: 2.5em 0 1em 0;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  color: var(--foreground-dim);
+}
+
+.footnote-back {
+  margin-left: 0.3em;
+}
+
+.footnote-ref {
+  font-variant-numeric: tabular-nums;
+  padding: 0.2em 0.05em 0.2em 0.2em;
+}
+
+.footnote-ref, .footnote-back {
+  user-select: none;
 }
 
 ol, ul {
@@ -128,7 +147,6 @@ ol, ul {
     margin-right: 0.2em !important;
   }
 }
-
 
 figure {
   margin: 1.8em 1.5em;
@@ -217,7 +235,7 @@ pre:has(>code) {
   padding: 0.8em;
   border-radius: var(--roundness);
   overflow-x: auto;
-  background: var(--code-bg);
+  background: var(--code-background);
 
   .special {
     color: light-dark(DarkOrchid, Thistle);
@@ -245,7 +263,7 @@ pre:has(>code) {
 :not(pre) code {
   padding: 0.1em 0.2em;
   border-radius: 0.2em;
-  background: var(--code-bg);
+  background: var(--code-background);
 }
 
 /* Structure of a quotation. Blockquote may contain multiple paragrpahs
@@ -254,7 +272,7 @@ pre:has(>code) {
      - span
        - cite */
 .quote {
-  border-left: var(--color-fg) solid 3px;
+  border-left: var(--foreground) solid 3px;
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
@@ -275,15 +293,17 @@ pre:has(>code) {
 a {
   transition: color ease-in-out 120ms;
 
-  color: var(--color-fg);
+  color: var(--foreground);
 
   &:visited {
-    color: hsl(from var(--color-fg) h s l);
+    color: hsl(from var(--foreground) h s l);
   }
 
   --anchor: light-dark(Olive, MediumSpringGreen);
 
   &:hover {
+    transition: transform ease-in-out 220ms;
+    transform: translateY(-0.1em);
     color: hsl(from var(--anchor) h s calc(l - 10));
   }
 
@@ -308,7 +328,7 @@ a {
 }
 
 ::selection {
-  background: hsl(from light-dark(Coral, Sienna) h s l / 0.4);
+  background: var(--accent);
 }
 
 :target {

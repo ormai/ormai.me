@@ -25,7 +25,7 @@
     <meta property="article:published_time" content="2026-09-02T09:25">
     <meta property="article:modified_time" content="2026-09-03T14:59">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/style.css?v=2">
+    <link rel="stylesheet" type="text/css" href="/style.css?v=3">
   </head>
 
   <body class="col container">
@@ -106,16 +106,16 @@
         >tree</a>, with data residing in its leaves, pointed at by block pointers containing also the size and the
         <strong>checksum</strong> of the child. When writing nothing is ever overwritten: the write happens to free
         space and the pointer of the parent is updated to point to the written data along with the newly calculated
-        checksum of the child. This is repeated from child to parent until the root of the tree (the <em>überblock</em>,
-        from which everything else is reachable) is reached. Until the überblock is updated nothing has changed, the
-        chain of pointers still points to valid data. The überblock is not overwritten either, a copy is added to a <a
-          href="https://en.wikipedia.org/wiki/Circular_buffer"
-        >ring</a> that cycles. This last switch of the überblock is one <em>atomic</em> operation.<a
-          href="#fn4"
-          class="footnote-ref"
-          id="fnref4"
-          role="doc-noteref"
-        ><sup>4</sup></a> Pretty cool eh?
+        checksum of the child. This is repeated from child to parent until the root of the tree (the <em
+        >überblock</em>, from which everything else is reachable) is reached. Until the überblock is updated nothing
+        has changed, the chain of pointers still points to valid data. The überblock is not overwritten either, a copy
+        is added to a <a href="https://en.wikipedia.org/wiki/Circular_buffer">ring</a> that cycles. This last switch of
+        the überblock is one <em>atomic</em> operation<sup><a
+            href="#fn4"
+            class="footnote-ref"
+            id="fnref4"
+            role="doc-noteref"
+          >4</a></sup>. Pretty cool eh?
       </p>
 
       <p>
@@ -175,8 +175,8 @@
       <h3 id="creating-the-pool">Creating the pool</h3>
 
       <p>
-        Note: the pool should be created on the system where it is intended to be used. Otherwise, it’s possible to move
-        pools across systems by using
+        Note: the pool should be created on the system where it is intended to be used. Otherwise, it’s possible to
+        move pools across systems by using
         <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-export.8.html"
           >zpool-export(8)</a></code> and <code><a
             href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-import.8.html"
@@ -243,8 +243,8 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
         we just create a <em>file system</em> (as opposed to a <em>volume</em>), which behaves like other file systems,
         can be mounted, and so on. The
         <code>keyformat=passphrase</code> property expects 8–512 bytes of data for the passphrase. I’m mounting the
-        dataset under <code>$HOME</code> so that it can’t be read by users who are not me nor <code>root</code>, or are
-        not in the group of my user, since it has permissions
+        dataset under <code>$HOME</code> so that it can’t be read by users who are not me nor <code>root</code>, or
+        are not in the group of my user, since it has permissions
         <code>0750</code>. I’m also disabling auto-mounting both by ZFS and SystemD, because it wouldn’t be ideal to
         interrupt boot to prompt for the passphrase since this machine is supposed to be connected to remotely. Doing it
         at log-in time <a href="https://wiki.archlinux.org/index.php?title=ZFS&amp;oldid=882715#SSH"
@@ -319,7 +319,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
           <li id="fn1">
             <p>
               I probably could have bought one 4 TB drive for a bit more of what I spent for those, but since the points
-              of failures are the single physical drives, I need more than one to have <em>parity</em>. <a
+              of failures are the single physical drives, I need more than one to have <em>parity</em>.<a
                 href="#fnref1"
                 class="footnote-back"
               >↩︎</a>
@@ -328,7 +328,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
           <li id="fn2">
             <p>
               At the time of writing (2026-08-26), a brand new 16 TB Seagate IronWolf costs €688 on Amazon. For
-              comparison, on 2025-08-26 the same drive was priced at €309, so a 125.7% increase in one year. <a
+              comparison, on 2025-08-26 the same drive was priced at €309, so a 125.7% increase in one year.<a
                 href="#fnref2"
                 class="footnote-back"
               >↩︎</a>
@@ -336,7 +336,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
           </li>
           <li id="fn3">
             <p>
-              I actually don’t now if this setup is feasible, or at all recommended. I did not follow through. <a
+              I actually don’t now if this setup is feasible, or at all recommended. I did not follow through.<a
                 href="#fnref3"
                 class="footnote-back"
               >↩︎</a>
@@ -345,7 +345,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
           <li id="fn4">
             <p>
               Cfr. <a href="https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Copy-on-write.html"
-              >Basic Concepts, Copy-on-Write</a>. <a
+              >Basic Concepts, Copy-on-Write</a>.<a
                 href="#fnref4"
                 class="footnote-back"
               >↩︎</a>
@@ -355,7 +355,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
             <p>
               A note about notation (even though it is a widespread convention): a command issued when the prompt is the
               symbol <code>#</code> indicates that the command is being run as <code>root</code>, while the prompt <code
-              >$</code> means that the command is being run by an unpriviledged user. <a
+              >$</code> means that the command is being run by an unpriviledged user.<a
                 href="#fnref5"
                 class="footnote-back"
               >↩︎</a>
