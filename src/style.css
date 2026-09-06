@@ -36,6 +36,9 @@ html {
    margin: 2cm;
 }
 
+abbr {
+  cursor: help;
+}
 
 body {
   height: 100%;

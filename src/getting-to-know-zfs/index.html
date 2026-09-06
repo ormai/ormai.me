@@ -22,8 +22,8 @@
     <meta property="article:author" content="Mario D'Andrea">
     <meta property="article:tag" content="self-host">
     <meta property="article:tag" content="Linux">
-    <meta property="article:published_time" content="2026-09-02T09:25">
-    <meta property="article:modified_time" content="2026-09-03T14:59">
+    <meta property="article:published_time" content="2026-09-02T09:25:00+02:00">
+    <meta property="article:modified_time" content="2026-09-06T21:13:18+02:00">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="stylesheet" type="text/css" href="/style.css?v=3">
   </head>
@@ -52,11 +52,11 @@
         <span class="drop-cap">H</span><span class="small-caps">aving</span> all my <abbr title="Solid State Drive"
         >SSD</abbr>s <a href="https://www.marginalia.nu/log/a_139_hdd/">constantly almost full</a>, despite the <a
           href="https://web.archive.org/web/20260828145645/https://diskprices.com/?locale=it"
-        >high storage prices</a> in this period, I’ve decided to get myself more storage. This time I wanted to have
+        >high storage prices</a> in this period, I've decided to get myself more storage. This time I wanted to have
         redundancy, since I have already been victim of those dreadful <abbr title="Input/Output">I/O</abbr> errors that
         <code><a href="https://man.archlinux.org/man/dmesg.1">dmesg(1)</a></code> writes in red. So I got a hard drive
         bay with five 3.5″ <abbr title="Serial Advanced Technology Attachment">SATA</abbr> slots, with its own cooling
-        fan and power supply, and three refurbished 1 TB “WD Blue” hard drives<a
+        fan and power supply, and three refurbished 1 TB "WD Blue" hard drives<a
           href="#fn1"
           class="footnote-ref"
           id="fnref1"
@@ -75,7 +75,7 @@
           title="Redundant Array of Inexpensive Disks"
         >RAID</abbr> implementation is <a
           href="https://wiki.archlinux.org/index.php?title=Btrfs&amp;oldid=883029#Multi-device_file_system"
-        >“fatally flawed”</a> along with RAID5 and its <a
+        >"fatally flawed"</a> along with RAID5 and its <a
           href="https://wiki.archlinux.org/title/RAID#Standard_RAID_levels"
         >unrecoverable read errors</a>, I finally stumbled upon ZFS. Originally I was thinking about using RAID5 with <a
           href="https://man.archlinux.org/man/core/mdadm/mdadm.8.en"
@@ -144,7 +144,7 @@
       </p>
 
       <p>
-        RAIDZ<var>N</var> is ZFS’s implementation of RAID, where <var>N</var> is the number of devices that can fail
+        RAIDZ<var>N</var> is ZFS's implementation of RAID, where <var>N</var> is the number of devices that can fail
         without losing data, it's also called the <em>parity</em> of the pool. RAIDZ solves the <em>write hole
           problem</em>, which causes unreadable data errors after a power loss.
       </p>
@@ -153,7 +153,7 @@
 
       <p>
         Having somewhat an idea of how all these concepts fit together, I installed ZFS on Debian, following the
-        project’s instructions. The packages are:
+        project's instructions. The packages are:
       </p>
 
       <ul>
@@ -175,8 +175,8 @@
       <h3 id="creating-the-pool">Creating the pool</h3>
 
       <p>
-        Note: the pool should be created on the system where it is intended to be used. Otherwise, it’s possible to
-        move pools across systems by using
+        Note: the pool should be created on the system where it is intended to be used. Otherwise, it's possible to move
+        pools across systems by using
         <code><a href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-export.8.html"
           >zpool-export(8)</a></code> and <code><a
             href="https://openzfs.github.io/openzfs-docs/man/master/8/zpool-import.8.html"
@@ -187,14 +187,14 @@
         To create a RAIDZ1 pool, <code>zpool</code> expects all the devices to be of the same size, to not be a mix of
         disks and files or of redundant and non redundant top-level VDEVs. The command receives the structure of the
         pool, it can take file, partitions and disks, can groups devices in mirrors, RAIDZ, or have them non redundant.
-        Disks don’t need to be formatted, in my case they had a NTFS partition that was causing the program to return
+        Disks don't need to be formatted, in my case they had a NTFS partition that was causing the program to return
         with an error. After deleting the partitions with <code><a href="https://man.archlinux.org/man/fdisk.8"
           >fdisk(8)</a></code> the command succeeded without the need to use the <code>-f</code>
         option. For a pool of less than 10 devices, OpenZFS <a
           href="https://openzfs.github.io/openzfs-docs/Project%20and%20Community/FAQ.html#selecting-dev-names-when-creating-a-pool-linux"
         >recommends using ID names</a> to identify disks, as these are persistent (at least for disks). Using instead
         device names like <code>sda</code>,
-        <code>sdb</code>, and so on, may cause detection failures by ZFS. The pool I’m creating is called <code
+        <code>sdb</code>, and so on, may cause detection failures by ZFS. The pool I'm creating is called <code
         >tank</code>
         and consists of a single RAIDZ1 top-level VDEV grouping three SATA devices (not partitions).
         <code>ashift=12</code> sets the sector size property to 4096 bytes, which <a
@@ -242,13 +242,13 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
         >type</code>, without specifying <code>-V &lt;size&gt;</code>
         we just create a <em>file system</em> (as opposed to a <em>volume</em>), which behaves like other file systems,
         can be mounted, and so on. The
-        <code>keyformat=passphrase</code> property expects 8–512 bytes of data for the passphrase. I’m mounting the
-        dataset under <code>$HOME</code> so that it can’t be read by users who are not me nor <code>root</code>, or
-        are not in the group of my user, since it has permissions
-        <code>0750</code>. I’m also disabling auto-mounting both by ZFS and SystemD, because it wouldn’t be ideal to
+        <code>keyformat=passphrase</code> property expects 8–512 bytes of data for the passphrase. I'm mounting the
+        dataset under <code>$HOME</code> so that it can't be read by users who are not me nor <code>root</code>, or are
+        not in the group of my user, since it has permissions
+        <code>0750</code>. I'm also disabling auto-mounting both by ZFS and SystemD, because it wouldn't be ideal to
         interrupt boot to prompt for the passphrase since this machine is supposed to be connected to remotely. Doing it
         at log-in time <a href="https://wiki.archlinux.org/index.php?title=ZFS&amp;oldid=882715#SSH"
-        >doesn’t seems ideal either with SSH</a>. So the command is
+        >doesn't seems ideal either with SSH</a>. So the command is
       </p>
 
       <pre><code><span class="special">#</span> <span class="sh-command">zfs</span> create <span class="sh-option">-o</span> mountpoint=&quot;$HOME/secret&quot; <span class="sh-operator">\</span>
@@ -257,7 +257,7 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
     tank/secret</code></pre>
 
       <p>
-        running it with the options <code>-n -v</code> won’t create anything, only validate it (<em>no-op</em>, dry
+        running it with the options <code>-n -v</code> won't create anything, only validate it (<em>no-op</em>, dry
         run). Actually running the command prompts to enter the passphrase. After that the dataset should be created:
       </p>
 
@@ -276,7 +276,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
 
       <p>
         Since auto-mounting is disabled, to use the dataset I run
-        <code>sudo zfs load-key tank/secret &amp;&amp; sudo zfs mount tank/secret</code>, and when I’m done with it I
+        <code>sudo zfs load-key tank/secret &amp;&amp; sudo zfs mount tank/secret</code>, and when I'm done with it I
         can just run
         <code>sudo zfs unmount tank/secret &amp;&amp; sudo zfs unload-key tank/secret</code>
         (notice the inverse order), or leave it mounted until shutdown or reboot.
@@ -336,7 +336,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
           </li>
           <li id="fn3">
             <p>
-              I actually don’t now if this setup is feasible, or at all recommended. I did not follow through.<a
+              I actually don't now if this setup is feasible, or at all recommended. I did not follow through.<a
                 href="#fnref3"
                 class="footnote-back"
               >↩︎</a>
