@@ -305,8 +305,6 @@ a {
   --anchor: light-dark(Olive, MediumSpringGreen);
 
   &:hover {
-    transition: transform ease-in-out 220ms;
-    transform: translateY(-0.1em);
     color: hsl(from var(--anchor) h s calc(l - 10));
   }
 
