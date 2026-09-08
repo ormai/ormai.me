@@ -202,7 +202,7 @@
         >is indicated even for disks with a physical sector size of 512 bytes</a>.
       </p>
 
-      <pre><code><span class="special">#</span> <span class="sh-command">zpool</span> create <span class="sh-option">-o</span> ashift=12 tank raidz1 \
+      <pre><code><span class="sh-prompt"># </span><span class="sh-command">zpool</span> create <span class="sh-option">-o</span> ashift=12 tank raidz1 \
     ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M1APMC \
     ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M80DFU \
     ata-WDC_WD10EZEX-60WN4A0_WD-WMC6Y0M6T4J7</code></pre>
@@ -212,7 +212,7 @@
         exists
       </p>
 
-      <pre><code><span class="special">$</span> <span class="sh-command">zpool</span> status
+      <pre><code><span class="sh-prompt">$ </span><span class="sh-command">zpool</span> status
   pool: tank
  state: ONLINE
 config:
@@ -227,7 +227,7 @@ config:
 errors: No known data errors</code></pre>
       <p>and if it is mounted</p>
 
-      <pre><code><span class="special">$</span> <span class="sh-command">mount</span>
+      <pre><code><span class="sh-prompt">$ </span><span class="sh-command">mount</span>
 tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
 
       <p>
@@ -251,7 +251,7 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
         >doesn't seems ideal either with SSH</a>. So the command is
       </p>
 
-      <pre><code><span class="special">#</span> <span class="sh-command">zfs</span> create <span class="sh-option">-o</span> mountpoint=&quot;$HOME/secret&quot; <span class="sh-operator">\</span>
+      <pre><code><span class="sh-prompt"># </span><span class="sh-command">zfs</span> create <span class="sh-option">-o</span> mountpoint=&quot;$HOME/secret&quot; <span class="sh-operator">\</span>
     <span class="sh-option">-o</span> canmount=noauto <span class="sh-option">-o</span> org.openzfs.systemd:ignore=on <span class="sh-operator">\</span> 
     <span class="sh-option">-o</span> encryption=on <span class="sh-option">-o</span> keyformat=passphrase <span class="sh-operator">\</span>
     tank/secret</code></pre>
@@ -261,7 +261,7 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
         run). Actually running the command prompts to enter the passphrase. After that the dataset should be created:
       </p>
 
-      <pre><code><span class="special">$</span> <span class="sh-command">zfs</span> list <span class="sh-option">-o</span> name,used,avail,refer,mountpoint,canmount,encryption,keystatus
+      <pre><code><span class="sh-prompt">$ </span><span class="sh-command">zfs</span> list <span class="sh-option">-o</span> name,used,avail,refer,mountpoint,canmount,encryption,keystatus
 NAME          USED  AVAIL  REFER  MOUNTPOINT          CANMOUNT  ENCRYPTION   KEYSTATUS
 tank         1018K  1.75T   128K  /tank               on        off          -
 tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  available</code></pre>
@@ -272,7 +272,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
         <code>~/secret</code>, but by default it is owned by <code>root</code>. To fix that
       </p>
 
-      <pre><code><span class="special">$</span> <span class="sh-command">sudo</span> chown <span class="sh-option">-R</span> mario:mario <span class="sh-path">~/secret</span> <span class="sh-operator">&amp;&amp;</span> <span class="sh-command">chmod</span> 0700 <span class="sh-path">~/secret</span></code></pre>
+      <pre><code><span class="sh-prompt">$ </span><span class="sh-command">sudo</span> chown <span class="sh-option">-R</span> mario:mario <span class="sh-path">~/secret</span> <span class="sh-operator">&amp;&amp;</span> <span class="sh-command">chmod</span> 0700 <span class="sh-path">~/secret</span></code></pre>
 
       <p>
         Since auto-mounting is disabled, to use the dataset I run

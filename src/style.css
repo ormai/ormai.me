@@ -261,8 +261,9 @@ pre:has(> code) {
   overflow-x: auto;
   background: var(--code-background);
 
-  .special {
+  .sh-prompt {
     color: light-dark(DarkOrchid, Thistle);
+    user-select: none;
   }
 
   .sh-option {
