@@ -6,22 +6,64 @@ html {
   --roundness: 6px;
   --code-background: light-dark(PapayaWhip, DarkSlateGray);
   --target-bg: hsl(from var(--accent) h s l);
+  --text-width: 70ch;
   color-scheme: light dark;
   color: var(--foreground);
   background: var(--background);
 
-  --sans: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui, helvetica neue, Adwaita Sans, Cantarell, Ubuntu, roboto, noto, helvetica, arial, sans-serif;
-  --serif: Iowan Old Style, Apple Garamond, Baskerville, Times New Roman, Droid Serif, Times, Source Serif Pro, serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
-  --mono: Menlo, Consolas, Monaco, Adwaita Mono, Liberation Mono, Lucida Console, monospace;
+  --sans:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    Adwaita Sans,
+    Cantarell,
+    Ubuntu,
+    roboto,
+    noto,
+    helvetica,
+    arial,
+    sans-serif;
+  --serif:
+    Iowan Old Style,
+    Apple Garamond,
+    Baskerville,
+    Times New Roman,
+    Droid Serif,
+    Times,
+    Source Serif Pro,
+    serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  --mono:
+    Menlo,
+    Consolas,
+    Monaco,
+    Adwaita Mono,
+    Liberation Mono,
+    Lucida Console,
+    monospace;
   font-family: var(--sans);
   height: 100%;
 
   scrollbar-color: var(--accent) var(--background);
 }
 
+::selection {
+  background: var(--accent);
+}
+
+:target {
+  animation: highlightFade 3s ease forwards;
+}
+
 @media (prefers-color-scheme: dark) {
   html {
-    --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg) brightness(90%) contrast(107%);
+    --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg)
+      brightness(90%) contrast(107%);
   }
 
   /* The filter above inverts the color of the alt text, making it unreadable, this is a fix. */
@@ -32,8 +74,8 @@ html {
 }
 
 @page {
-   size: A4;
-   margin: 2cm;
+  size: A4;
+  margin: 2cm;
 }
 
 abbr {
@@ -45,23 +87,15 @@ body {
   margin: 0;
 }
 
-*,
-*::before,
-*::after {
+*, *::before, *::after {
   box-sizing: border-box;
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1, h2, h3, h4, h5, h6 {
   margin-block: 0.9em 0.5em;
 }
 
@@ -75,9 +109,7 @@ h2 {
   font-weight: 600;
 }
 
-img,
-svg,
-video {
+img, svg, video {
   max-width: 100%;
   display: block;
 }
@@ -101,17 +133,11 @@ article {
 
 /* Text container */
 .container {
-  max-width: min(70ch, 100% - 1.5rem);
+  max-width: min(var(--text-width), 100% - 1.5rem);
   margin-inline: auto;
 
   p, li {
     line-height: 1.5em;
-  }
-}
-
-@media (max-width: calc(70ch * 2)) {
-  .table-of-content {
-    display: none;
   }
 }
 
@@ -127,28 +153,21 @@ hr {
   color: var(--foreground-dim);
 }
 
+.footnote-ref, .footnote-back {
+  user-select: none;
+}
+
 .footnote-back {
   margin-left: 0.3em;
 }
 
 .footnote-ref {
   font-variant-numeric: tabular-nums;
-  padding: 0.2em 0.05em 0.2em 0.2em;
-}
-
-.footnote-ref, .footnote-back {
-  user-select: none;
+  padding: 0.2em 0.05em 0.6em 0.1em; /* More area to tap */
 }
 
 ol, ul {
   padding-inline-start: 2em;
-}
-
-@media (max-width: 70ch) {
-  figure {
-    margin-left: 0.2em !important;
-    margin-right: 0.2em !important;
-  }
 }
 
 figure {
@@ -173,6 +192,13 @@ footer {
   line-height: 1.5rem;
   text-align: center;
   border-top: 1px dashed grey;
+}
+
+@media (max-width: var(--text-width)) {
+  figure {
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
+  }
 }
 
 .col {
@@ -206,7 +232,7 @@ footer {
 }
 
 .gap08 {
-  gap: .8rem;
+  gap: 0.8rem;
 }
 
 .gap1 {
@@ -225,16 +251,11 @@ footer {
   user-select: none;
 }
 
-/* These components are displayed inline. To stand out from text they are indented and have vertical margin. */
-.quote {
-  margin: 1rem 2rem;
-}
-
 code {
   font-family: var(--mono);
 }
 
-pre:has(>code) {
+pre:has(> code) {
   padding: 0.8em;
   border-radius: var(--roundness);
   overflow-x: auto;
@@ -275,6 +296,7 @@ pre:has(>code) {
      - span
        - cite */
 .quote {
+  margin: 1rem 2rem;
   border-left: var(--foreground) solid 3px;
   display: flex;
   flex-direction: column;
@@ -317,7 +339,7 @@ a {
   float: inline-start;
   font-size: 4.8em;
   line-height: 0.9em;
-  margin-right: 0.13em;
+  margin-right: 0.14em;
 }
 
 .small-caps {
@@ -326,14 +348,6 @@ a {
 
 .numeric {
   font-variant-numeric: tabular-nums slashed-zero;
-}
-
-::selection {
-  background: var(--accent);
-}
-
-:target {
-  animation: highlightFade 3s ease forwards;
 }
 
 @keyframes highlightFade {
