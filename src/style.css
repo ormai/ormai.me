@@ -194,7 +194,7 @@ footer {
   border-top: 1px dashed grey;
 }
 
-@media (max-width: var(--text-width)) {
+@media (max-width: 70ch) {
   figure {
     margin-left: 0.2em !important;
     margin-right: 0.2em !important;
