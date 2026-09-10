@@ -2,14 +2,17 @@
 
 set -e
 
+readonly SRCDIR=src
+readonly OUTDIR=public
+
 build() {
-  rsync -avhL --delete src/ public
+  rsync -avhL --delete "$SRCDIR/" "$OUTDIR"
   # https://github.com/tdewolff/minify
   minify --recursive --inplace public
 }
 
 deploy() {
-  rsync -avhL --partial --info=progress2 --delete --info=progress public/ server:/var/www/ormai.me
+  rsync -avhL --partial --info=progress2 --delete --info=progress "$OUTDIR/" server:/var/www/ormai.me
 }
 
 case "$1" in
@@ -23,6 +26,6 @@ serve)
   xdg-open http://localhost:8000
   python -m http.server
   ;;
-clean) rm -r public;;
-*) echo "Unkown subcommand '$1'" ;;
+clean) rm -r "$OUTDIR";;
+*) echo "Unknown subcommand '$1'" ;;
 esac

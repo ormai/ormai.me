@@ -28,13 +28,13 @@
     <meta property="article:modified_time" content="2026-09-06T21:13:18+02:00">
     <meta name="fediverse:creator" content="@ormai@mas.to">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/style.css?v=4">
+    <link rel="stylesheet" type="text/css" href="/style.css?v=5">
     <link rel="alternate" type="application/atom+xml" title="Mario D'Andrea" href="/atom.xml">
   </head>
 
   <body class="col container">
     <article>
-      <h1 id="getting-to-know-zfs">Getting to know ZFS</h1>
+      <h1 id="getting-to-know-zfs"><a class="self" href="#getting-to-know-zfs"></a>Getting to know ZFS</h1>
 
       <p>
         <i>ZFS introduced from the perspective of someone who wants to bring online a domestic storage pool, with parity
@@ -85,7 +85,7 @@
           href="https://man.archlinux.org/man/core/mdadm/mdadm.8.en"
         ><code>mdadm(8)</code></a>
         and on top of that <a href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup#LUKS2">LUKS2</a>, and finally
-        top of that maybe ext4<sup><a
+        on top of that maybe ext4<sup><a
             href="#fn3"
             id="fnref3"
             class="footnote-ref"
@@ -102,7 +102,7 @@
         and use it via <abbr title="Secure File Transfer protocol, also known as FTP over SSH">SFTP</abbr>.
       </p>
 
-      <h2 id="zfs-concepts">ZFS concepts</h2>
+      <h2 id="zfs-concepts"><a class="self" href="#zfs-concepts"></a>ZFS concepts</h2>
 
       <p>
         ZFS is a <strong>copy-on-write</strong> file system. It is structured like a <a
@@ -135,7 +135,7 @@
         especially if the pool is almost full.
       </p>
 
-      <h3 id="anatomy-of-a-pool">Anatomy of a pool</h3>
+      <h3 id="anatomy-of-a-pool"><a class="self" href="#anatomy-of-a-pool"></a>Anatomy of a pool</h3>
 
       <p>
         ZFS operates on a hierarchy of virtual devices (VDEVs). The root VDEV is the pool itself. The pool is a
@@ -153,7 +153,7 @@
           problem</em>, which causes unreadable data errors after a power loss.
       </p>
 
-      <h2 id="doing-the-thing">Doing the thing</h2>
+      <h2 id="doing-the-thing"><a class="self" href="#doing-the-thing"></a>Doing the thing</h2>
 
       <p>
         Having somewhat an idea of how all these concepts fit together, I installed ZFS on Debian, following the
@@ -176,7 +176,7 @@
         </li>
       </ul>
 
-      <h3 id="creating-the-pool">Creating the pool</h3>
+      <h3 id="creating-the-pool"><a class="self" href="#creating-the-pool"></a>Creating the pool</h3>
 
       <p>
         Note: the pool should be created on the system where it is intended to be used. Otherwise, it's possible to move
@@ -238,7 +238,7 @@ tank on /tank type zfs (rw,relatime,xattr,noacl,casesensitive)</code></pre>
         I can also see that a <code>tank.mount</code> <a href="https://systemd.io/">SystemD</a> unit appeared. Nice.
       </p>
 
-      <h3 id="creating-a-dataset">Creating a dataset</h3>
+      <h3 id="creating-a-dataset"><a class="self" href="#creating-a-dataset"></a>Creating a dataset</h3>
 
       <p>
         Now we have a pool, mounted at <code>/tank</code>, a directory/file hierarchy can be created directly there. But
@@ -296,7 +296,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
         </figcaption>
       </figure>
 
-      <h2 id="conclusion">Conclusion</h2>
+      <h2 id="conclusion"><a class="self" href="#conclusion"></a>Conclusion</h2>
 
       <p>
         This article was born from notes about ZFS concepts and a sort of journal of the things I did and the commands I
