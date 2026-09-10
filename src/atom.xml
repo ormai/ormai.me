@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <link href="https://ormai.me/"/>
+  <title>Mario D'Andrea</title>
+  <id>https://ormai.me/</id>
+  <updated>2026-09-02T09:25:00+02:00</updated>
+  <author>
+    <name>Mario D'Andrea</name>
+  </author>
+  <entry>
+    <title>Getting to know ZFS</title>
+    <link href="https://ormai.me/getting-to-know-zfs/"/>
+    <id>https://ormai.me/getting-to-know-zfs/</id>
+    <updated>2026-09-02T09:25:00+02:00</updated>
+    <summary>ZFS introduced from the perspective of someone who wants to bring online a domestic storage pool, with parity and encryption.</summary>
+  </entry>
+</feed>
