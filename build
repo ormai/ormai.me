@@ -5,6 +5,11 @@ set -e
 readonly SRCDIR=src
 readonly OUTDIR=public
 
+check() {
+  # chttps://github.com/validator/validator
+  vnu --skip-non-html --also-check-css --also-check-svg "$SRCDIR"
+}
+
 build() {
   rsync -avhL --delete "$SRCDIR/" "$OUTDIR"
   # https://github.com/tdewolff/minify
@@ -17,6 +22,7 @@ deploy() {
 
 case "$1" in
 build) build ;;
+check) check ;;
 deploy)
   build
   deploy
