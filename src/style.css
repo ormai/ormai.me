@@ -3,9 +3,9 @@ html {
   --foreground: light-dark(#191817, OldLace);
   --foreground-dim: light-dark(DimGray, Silver);
   --background: light-dark(WhiteSmoke, #171819);
-  --roundness: 6px;
   --code-background: light-dark(PapayaWhip, DarkSlateGray);
-  --target-bg: hsl(from var(--accent) h s l);
+  --target-bg: var(--accent);
+  --roundness: 6px;
   --text-width: 70ch;
   color-scheme: light dark;
   color: var(--foreground);
@@ -58,19 +58,6 @@ html {
 
 :target {
   animation: highlightFade 3s ease forwards;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    --svg-filter: invert(94%) sepia(0%) saturate(24%) hue-rotate(360deg)
-      brightness(90%) contrast(107%);
-  }
-
-  /* The filter above inverts the color of the alt text, making it unreadable, this is a fix. */
-  a:has(img),
-  a:has(img):hover {
-    color: var(--background);
-  }
 }
 
 @page {
@@ -304,7 +291,7 @@ pre:has(> code) {
   background: var(--code-background);
 }
 
-/* Structure of a quotation. Blockquote may contain multiple paragrpahs
+/* Structure of a quotation. Blockquote may contain multiple paragraphs
    - div.quote
      - blockquote
      - span
@@ -334,7 +321,7 @@ a {
   color: var(--foreground);
 
   &:visited {
-    color: hsl(from var(--foreground) h s l);
+    color: var(--foreground);
   }
 
   --anchor: light-dark(Olive, MediumSpringGreen);
