@@ -180,7 +180,14 @@ figure {
   }
 
   img {
-    border-radius: 0.2em;
+    border-radius: var(--roundness);
+  }
+}
+
+@media (max-width: 70ch) {
+  figure {
+    margin-left: 0.2em !important;
+    margin-right: 0.2em !important;
   }
 }
 
@@ -192,13 +199,6 @@ footer {
   line-height: 1.5rem;
   text-align: center;
   border-top: 1px dashed grey;
-}
-
-@media (max-width: 70ch) {
-  figure {
-    margin-left: 0.2em !important;
-    margin-right: 0.2em !important;
-  }
 }
 
 .col {
@@ -317,10 +317,9 @@ pre:has(> code) {
 
 a {
   transition: color ease-in-out 120ms;
+  text-decoration: underline color-mix(in oklab, currentColor 25%, transparent) solid 2px;
 
-  color: var(--foreground);
-
-  &:visited {
+  &, &:visited {
     color: var(--foreground);
   }
 
