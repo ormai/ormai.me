@@ -82,8 +82,16 @@ p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
+hgroup p {
+  margin-block: 0.5em;
+}
+
 h1, h2, h3, h4, h5, h6 {
   margin-block: 1.4em 0.5em;
+
+  hgroup & {
+    margin-bottom: 0;
+  }
 
   @media (hover: hover) {
     &:hover > a.self::before {
@@ -96,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-p, .quote, pre {
+p, div:has(> blockquote), pre {
   margin-block: 1em;
 }
 
@@ -201,6 +209,93 @@ footer {
   border-top: 1px dashed grey;
 }
 
+code {
+  font-family: var(--mono);
+}
+
+:not(pre) code {
+  padding: 0.1em 0.2em;
+  border-radius: 0.2em;
+  background: var(--code-background);
+}
+
+pre:has(> code) {
+  padding: 0.8em;
+  border-radius: var(--roundness);
+  overflow-x: auto;
+  background: var(--code-background);
+
+  .sh-prompt {
+    color: light-dark(DarkOrchid, Thistle);
+    user-select: none;
+  }
+
+  .sh-option {
+    color: light-dark(Firebrick, Gold);
+    font-style: italic;
+  }
+
+  .sh-command {
+    color: light-dark(Navy, SkyBlue);
+    font-weight: 600;
+  }
+
+  .sh-path {
+    color: light-dark(Green, MediumSpringGreen);
+  }
+
+  .sh-operator {
+    color: light-dark(Sienna, NavajoWhite);
+  }
+}
+
+div:has(> blockquote) {
+  border-left: var(--foreground) solid 3px;
+  display: flex;
+  flex-direction: column;
+  padding: 0.2em 0.8em;
+  margin-left: 0.7em;
+  margin-right: 0.7em;
+
+  blockquote {
+    font-size: 1em;
+    margin: 0;
+    margin-block: 0 0.5em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  /* Attribution */
+  > p {
+    font-size: 0.85em;
+    &::before {
+      content: "— ";
+    }
+  }
+}
+
+a {
+  transition: color ease-in-out 120ms;
+  text-decoration: underline color-mix(in oklab, currentColor 25%, transparent)
+    solid 2px;
+
+  &, &:visited {
+    color: var(--foreground);
+  }
+
+  --anchor: light-dark(Olive, MediumSpringGreen);
+
+  &:hover {
+    color: hsl(from var(--anchor) h s calc(l - 10));
+  }
+
+  &:active {
+    color: hsl(from var(--anchor) h s calc(l + 10));
+  }
+}
+
 .col {
   display: flex;
   flex-direction: column;
@@ -249,89 +344,6 @@ footer {
 
 .no-select {
   user-select: none;
-}
-
-code {
-  font-family: var(--mono);
-}
-
-pre:has(> code) {
-  padding: 0.8em;
-  border-radius: var(--roundness);
-  overflow-x: auto;
-  background: var(--code-background);
-
-  .sh-prompt {
-    color: light-dark(DarkOrchid, Thistle);
-    user-select: none;
-  }
-
-  .sh-option {
-    color: light-dark(Firebrick, Gold);
-    font-style: italic;
-  }
-
-  .sh-command {
-    color: light-dark(Navy, SkyBlue);
-    font-weight: 600;
-  }
-
-  .sh-path {
-    color: light-dark(Green, MediumSpringGreen);
-  }
-
-  .sh-operator {
-    color: light-dark(Sienna, NavajoWhite);
-  }
-}
-
-:not(pre) code {
-  padding: 0.1em 0.2em;
-  border-radius: 0.2em;
-  background: var(--code-background);
-}
-
-/* Structure of a quotation. Blockquote may contain multiple paragraphs
-   - div.quote
-     - blockquote
-     - span
-       - cite */
-.quote {
-  border-left: var(--foreground) solid 3px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4em;
-  padding: 0.3em 1em;
-  font-family: var(--serif);
-
-  blockquote {
-    font-style: italic;
-    font-size: 1.1rem;
-    margin: 0;
-  }
-
-  span::before {
-    content: "— ";
-  }
-}
-
-a {
-  transition: color ease-in-out 120ms;
-  text-decoration: underline color-mix(in oklab, currentColor 25%, transparent) solid 2px;
-
-  &, &:visited {
-    color: var(--foreground);
-  }
-
-  --anchor: light-dark(Olive, MediumSpringGreen);
-
-  &:hover {
-    color: hsl(from var(--anchor) h s calc(l - 10));
-  }
-
-  &:active {
-    color: hsl(from var(--anchor) h s calc(l + 10));
-  }
 }
 
 .drop-cap {
