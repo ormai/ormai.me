@@ -24,7 +24,7 @@
     <meta property="article:tag" content="self-host">
     <meta property="article:tag" content="Linux">
     <meta property="article:published_time" content="2026-09-02T09:25:00+02:00">
-    <meta property="article:modified_time" content="2026-09-12T18:39:04+02:00">
+    <meta property="article:modified_time" content="2026-09-14T09:06:37+02:00">
     <meta name="fediverse:creator" content="@ormai@mas.to">
     <link rel="canonical" href="http://ormai.me/getting-to-know-zfs">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -279,11 +279,9 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
       <pre><code><span class="sh-prompt">$ </span><span class="sh-command">sudo</span> chown <span class="sh-option">-R</span> mario:mario <span class="sh-path">~/secret</span> <span class="sh-operator">&amp;&amp;</span> <span class="sh-command">chmod</span> 0700 <span class="sh-path">~/secret</span></code></pre>
 
       <p>
-        Since auto-mounting is disabled, to use the dataset I run
-        <code>sudo zfs load-key tank/secret &amp;&amp; sudo zfs mount tank/secret</code>, and when I'm done with it I
-        can just run
-        <code>sudo zfs unmount tank/secret &amp;&amp; sudo zfs unload-key tank/secret</code>
-        (notice the inverse order), or leave it mounted until shutdown or reboot.
+        Since auto-mounting is disabled, to use the dataset I run <code>sudo zfs mount -l tank/secret</code>, and when
+        I'm done with it I can just run <code>sudo zfs unmount -u tank/secret</code> , or leave it mounted until
+        shutdown or reboot.
       </p>
 
       <figure>
