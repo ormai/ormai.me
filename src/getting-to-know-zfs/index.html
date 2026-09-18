@@ -28,12 +28,13 @@
     <meta name="fediverse:creator" content="@ormai@mas.to">
     <link rel="canonical" href="http://ormai.me/getting-to-know-zfs">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="/style.css?v=5">
+    <link rel="stylesheet" type="text/css" href="/style.css?v=6">
     <link rel="alternate" type="application/atom+xml" title="Mario D'Andrea" href="/atom.xml">
   </head>
 
   <body class="col container">
     <article>
+      <!-- TODO: change layout by adding padding to put the heading anchor on -->
       <h1 id="getting-to-know-zfs"><a class="self" href="#getting-to-know-zfs"></a>Getting to know ZFS</h1>
 
       <p>
@@ -41,7 +42,7 @@
           and encryption.</i>
       </p>
 
-      <figure class="cover">
+      <figure>
         <img
           alt="A painting showing a man and a woman cleaning and cutting what they harvested. There are cabbages, pumpkins, grapes and other things, all scattered around them. In the back there is a man standing, probably using a well while petting a cat. Further back there is a wooden house with another cat sitting on the doorstep."
           src="after-the-harvest.webp"
@@ -81,9 +82,8 @@
           href="https://wiki.archlinux.org/index.php?title=Btrfs&amp;oldid=883029#Multi-device_file_system"
         >"fatally flawed"</a> along with RAID5 and its <a
           href="https://wiki.archlinux.org/title/RAID#Standard_RAID_levels"
-        >unrecoverable read errors</a>, I finally stumbled upon ZFS. Originally I was thinking about using RAID5 with <a
-          href="https://man.archlinux.org/man/core/mdadm/mdadm.8.en"
-        ><code>mdadm(8)</code></a>
+        >unrecoverable read errors</a>, I finally stumbled upon ZFS. Originally I was thinking about using RAID 5 with
+        <a href="https://man.archlinux.org/man/core/mdadm/mdadm.8.en"><code>mdadm(8)</code></a>
         and on top of that <a href="https://en.wikipedia.org/wiki/Linux_Unified_Key_Setup">LUKS2</a>, and finally on top
         of that maybe ext4<sup><a
             href="#fn3"
@@ -280,8 +280,8 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
 
       <p>
         Since auto-mounting is disabled, to use the dataset I run <code>sudo zfs mount -l tank/secret</code>, and when
-        I'm done with it I can just run <code>sudo zfs unmount -u tank/secret</code> , or leave it mounted until
-        shutdown or reboot.
+        I'm done with it I can just run <code>sudo zfs unmount -u tank/secret</code>, or leave it mounted until shutdown
+        or reboot.
       </p>
 
       <figure>
@@ -357,7 +357,7 @@ tank/secret   234K  1.75T   234K  /home/mario/secret  noauto    aes-256-gcm  ava
             <p>
               A note about notation (even though it is a widespread convention): a command issued when the prompt is the
               symbol <code>#</code> indicates that the command is being run as <code>root</code>, while the prompt <code
-              >$</code> means that the command is being run by an unpriviledged user.<a
+              >$</code> means that the command is being run by an unprivileged user.<a
                 href="#fnref5"
                 class="footnote-back"
               >↩︎</a>
