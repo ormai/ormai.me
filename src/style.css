@@ -4,7 +4,6 @@ html {
   --foreground-dim: light-dark(DimGray, Silver);
   --background: light-dark(WhiteSmoke, #171819);
   --code-background: light-dark(PapayaWhip, DarkSlateGray);
-  --target-bg: var(--accent);
   --roundness: 6px;
   --text-width: 70ch;
   color-scheme: light dark;
@@ -371,13 +370,13 @@ a {
 
 @keyframes highlightFade {
   from {
-    background-color: var(--target-bg);
-    box-shadow: 0 0 0 4px var(--target-bg);
+    background-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent);
   }
 
   50% {
-    background-color: var(--target-bg);
-    box-shadow: 0 0 0 4px var(--target-bg);
+    background-color: var(--accent);
+    box-shadow: 0 0 0 4px var(--accent);
   }
 
   to {
