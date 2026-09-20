@@ -193,6 +193,14 @@ figure {
   }
 }
 
+/* When an image has either the intrinsic width or height attributes, don't use them in the layout. */
+img[width] {
+  width: auto;
+}
+img[height] {
+  height: auto;
+}
+
 @media (max-width: 70ch) {
   figure {
     margin-inline: 0;
