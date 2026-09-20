@@ -1,0 +1,7 @@
+origin = "https://ormai.me"
+sources = "src"
+build_dir = "public"
+deploy_cmd = ["rsync", "-avhL", "--partial", "--delete", "--info=progress2", "{DIR}/", "server:/var/www/ormai.me"]
+
+[serve]
+debounce = 100
